@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="inner-classes/src/main/java"/>
+	<classpathentry kind="src" path="pizza/.mvn/wrapper"/>
+	<classpathentry kind="src" path="pizza/src/main/java"/>
+	<classpathentry kind="src" path="pizza/src/test/java"/>
+	<classpathentry kind="src" path="Pizzeria/.mvn/wrapper"/>
+	<classpathentry kind="src" path="Pizzeria/src/main/java"/>
+	<classpathentry kind="src" path="Pizzeria/src/test/java"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -3,8 +3,16 @@ package com.pizzeria.training.models;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection ="orders")
 public class Order {
-	private int orderID;
+	@Id
+	public ObjectId _id;
+	
+	private Integer orderID;
 	private List<Pizza> pizzas;
 	private int customerID;
 	private Date date;

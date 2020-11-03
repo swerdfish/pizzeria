@@ -2,8 +2,16 @@ package com.pizzeria.training.models;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection="pizza")
 public class Pizza {
-	private float height;
+	@Id
+	public ObjectId _id;
+	
+	private Float height;
 	private PizzaType type;
 	private List<Toppings> toppings;
 	private double cost;

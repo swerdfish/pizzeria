@@ -11,38 +11,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.Pizza;
-import com.pizzeria.training.repository.OrdersRepository;
+import com.pizzeria.training.repository.PizzaRepository;
 
 @RestController
-@RequestMapping("/orders")
-public class OrderController {
-	
-	@Autowired
-	private OrdersRepository repository;
+@RequestMapping("/pizza")
+public class PizzaController {
 
-	@GetMapping("/test")
-	public @ResponseBody String test(){
-		
-		return "Endpoint works";
-	}
+	@Autowired
+	private PizzaRepository repository;
 	
-	@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
-	public List<Order> getAllOrders() {
+	@GetMapping("/test")
+	public @ResponseBody String getAllOrders(){
+		
+		return "Endpoint works v3";
+	}
+	 
+	@RequestMapping(value = "/getPizza", method = RequestMethod.GET)
+	public List<Pizza> getAllCustomer() {
 	  return repository.findAll();
 	}
 	
-	
-	@PostMapping("/addOrder")
-	  Order newOrder(@RequestBody Order newOrder) {
-	    return repository.save(newOrder);
+
+	@PostMapping("/addPizza")
+	  Pizza newCustomer(@RequestBody Pizza newPizza) {
+	    return repository.save(newPizza);
 	  }
 	
-	//Sample Input
+	//Sample input for postman
 //	{
-//	    "orderID": 123,
-//	    "pizzas":[{
 //	    "height": 13.0,
 //	    "type": "CLASSIC",
 //	    "toppings" : [
@@ -51,10 +48,5 @@ public class OrderController {
 //	    ],
 //	    "cost" : 12,
 //	    "size" : "SMALL"
-//	}],
-//	"data" : "12-10-19",
-//	"cost" : 12.0,
-//	"tip" : 0
 //	}
-	
 }
