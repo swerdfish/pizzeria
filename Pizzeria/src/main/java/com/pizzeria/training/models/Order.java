@@ -1,85 +1,112 @@
 package com.pizzeria.training.models;
 
-import java.util.Date;
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/**
+ * 
+ * @author teodorojr.delson, stephen.gruver
+ * @param _id 				The MongoDB document Id.
+ * @param pizzas			The pizzas ordered by the customer
+ * @param customerIdString	The hex string of the _id of the 
+ * 							<a href="#{@link com.pizzeria.training.models.Customer}">{@link Customer}</a> 
+ * 							that ordered the pizza(s).
+ * @param cost 				The cost of the Order
+ * @param tip				The tip paid by the customer in addition to the cost
+ * @param setAsFavorite			Whether or not the Order's pizzas should be saved as the Customer's favoriteOrder. 
+ */
 @Document(collection ="orders")
 public class Order {
 	@Id
 	public ObjectId _id;
 	
-	private Integer orderID;
 	private List<Pizza> pizzas;
-	private int customerID;
-	private Date date;
+	private String customerIdString;
 	private double cost;
 	private double tip;
+	@Transient
+	private Boolean setAsFavorite;	//Prevents from being added to the database
 	
 	public Order() {}
 	
-	public int getOrderID() {
-		return this.orderID;
+	public Order(List<Pizza> pizzas, ObjectId customerId, double cost, double tip, Boolean favorite) {
+		super();
+		this.pizzas = pizzas;
+		this.customerIdString = customerId.toHexString();
+		this.cost = cost;
+		this.tip = tip;
+		this.setAsFavorite = favorite;
 	}
-	public void setOrderID(int id) {
-		this.orderID = id;
+	
+	public Order(List<Pizza> pizzas, String customerIdString, double cost, double tip, Boolean favorite) {
+		super();
+		this.pizzas = pizzas;
+		this.customerIdString = customerIdString;
+		this.cost = cost;
+		this.tip = tip;
+		this.setAsFavorite = favorite;
 	}
 	
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
+	
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
 	}
-	public int getCustomerID() {
-		return customerID;
+
+	public String getCustomerIdString() {
+		return customerIdString;
 	}
-	public void setCustomerID(int customerID) {
-		this.customerID = customerID;
+
+	public void setCustomerIdString(String customerIDString) {
+		this.customerIdString = customerIDString;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
+
 	public double getCost() {
 		return cost;
 	}
+	
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+	
 	public double getTip() {
 		return tip;
 	}
+	
 	public void setTip(double tip) {
 		this.tip = tip;
 	}
-	public Order(List<Pizza> pizzas, int customerID, Date date, double cost, double tip) {
-		super();
-		this.pizzas = pizzas;
-		this.customerID = customerID;
-		this.date = date;
-		this.cost = cost;
-		this.tip = tip;
+	
+	public Boolean getFavorite() {
+		return setAsFavorite;
 	}
+	
+	public void setFavorite(Boolean favorite) {
+		this.setAsFavorite = favorite;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((_id == null) ? 0 : _id.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(cost);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + customerID;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((customerIdString == null) ? 0 : customerIdString.hashCode());
+		result = prime * result + ((setAsFavorite == null) ? 0 : setAsFavorite.hashCode());
 		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
 		temp = Double.doubleToLongBits(tip);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -89,14 +116,22 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
+		if (_id == null) {
+			if (other._id != null)
+				return false;
+		} else if (!_id.equals(other._id))
+			return false;
 		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
 			return false;
-		if (customerID != other.customerID)
-			return false;
-		if (date == null) {
-			if (other.date != null)
+		if (customerIdString == null) {
+			if (other.customerIdString != null)
 				return false;
-		} else if (!date.equals(other.date))
+		} else if (!customerIdString.equals(other.customerIdString))
+			return false;
+		if (setAsFavorite == null) {
+			if (other.setAsFavorite != null)
+				return false;
+		} else if (!setAsFavorite.equals(other.setAsFavorite))
 			return false;
 		if (pizzas == null) {
 			if (other.pizzas != null)
@@ -110,10 +145,7 @@ public class Order {
 
 	@Override
 	public String toString() {
-		return "Order [orderID=" + orderID + ", pizzas=" + pizzas + ", customerID=" + customerID + ", date=" + date
-				+ ", cost=" + cost + ", tip=" + tip + "]";
+		return "Order [_id=" + _id + ", pizzas=" + pizzas + ", customerID=" + customerIdString + ", cost=" + cost + ", tip="
+				+ tip + ", setAsFavorite=" + setAsFavorite + "]";
 	}
-	
-	
-	
 }

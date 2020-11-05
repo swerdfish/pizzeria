@@ -43,12 +43,12 @@ public class OrderController {
 	
 	@PostMapping("/addOrder")
 	public @ResponseBody Order newOrder(@RequestBody Order newOrder) {
-	  return orderServ.save(newOrder);
+		return orderServ.save(newOrder);
+		
 	}
 	
 	//Sample Input
 //	{
-//	    "orderID": 123,
 //	    "pizzas":[{
 //	    "height": 13.0,
 //	    "type": "CLASSIC",
@@ -59,7 +59,6 @@ public class OrderController {
 //	    "cost" : 12,
 //	    "size" : "SMALL"
 //	}],
-//	"data" : "12-10-19",
 //	"cost" : 12.0,
 //	"tip" : 0
 //	}
