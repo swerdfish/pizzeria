@@ -52,7 +52,7 @@ public class OrderController {
 //	    "cost" : 12,
 //	    "size" : "SMALL"
 //	}],
-//	"data" : "12-10-19",
+//	"date" : "2020-12-10",
 //	"cost" : 12.0,
 //	"tip" : 0
 //	}
