@@ -3,7 +3,6 @@ package com.pizzeria.training.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,31 +12,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Customer;
-import com.pizzeria.training.repository.CustomerRepository;
+import com.pizzeria.training.service.CustomerService;
 
 @RestController
 @RequestMapping("/customers")
 public class CustomerController {
 
+		private CustomerService custServ;
+		
+		public CustomerController() {
+		}
+		
 		@Autowired
-		private CustomerRepository repository;
-		
-		
+		public CustomerController(CustomerService custServ) {
+			super();
+			this.custServ = custServ;
+		}
+
 		@GetMapping("/test")
 		public @ResponseBody String getAllOrders(){
-			
-			return "Endpoint works v2";
+			return "Customer Endpoint works";
 		}
 		 
 		@RequestMapping(value = "/getCustomers", method = RequestMethod.GET)
-		public List<Customer> getAllCustomer() {
-		  return repository.findAll();
+		public @ResponseBody List<Customer> getAllCustomer() {
+		  return custServ.findAll();
 		}
 		
 		@PostMapping("/addCustomer")
-		  Customer newCustomer(@RequestBody Customer newCustomer) {
-		    return repository.save(newCustomer);
-		  }
+		 public @ResponseBody Customer newCustomer(@RequestBody Customer newCustomer) {
+		    return custServ.save(newCustomer);
+		}
 
 //Sample input postman
 //		{

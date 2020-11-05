@@ -12,30 +12,38 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Pizza;
-import com.pizzeria.training.repository.PizzaRepository;
+import com.pizzeria.training.service.PizzaService;
 
 @RestController
 @RequestMapping("/pizza")
 public class PizzaController {
 
 	@Autowired
-	private PizzaRepository repository;
+	private PizzaService pizzaServ;
 	
+	public PizzaController() {
+	}
+	
+	@Autowired
+	public PizzaController(PizzaService pizzaServ) {
+		super();
+		this.pizzaServ = pizzaServ;
+	}
+
 	@GetMapping("/test")
 	public @ResponseBody String getAllOrders(){
 		
-		return "Endpoint works v3";
+		return "Pizza Endpoint works";
 	}
 	 
 	@RequestMapping(value = "/getPizza", method = RequestMethod.GET)
 	public List<Pizza> getAllCustomer() {
-	  return repository.findAll();
+	  return pizzaServ.findAll();
 	}
 	
-
 	@PostMapping("/addPizza")
 	  Pizza newCustomer(@RequestBody Pizza newPizza) {
-	    return repository.save(newPizza);
+	    return pizzaServ.save(newPizza);
 	  }
 	
 	//Sample input for postman

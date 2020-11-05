@@ -12,32 +12,39 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Order;
-import com.pizzeria.training.models.Pizza;
-import com.pizzeria.training.repository.OrdersRepository;
+import com.pizzeria.training.service.OrderService;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
 	
+	private OrderService orderServ;
+	
+	public OrderController() {
+	}
+
 	@Autowired
-	private OrdersRepository repository;
+	public OrderController(OrderService orderServ) {
+		super();
+		this.orderServ = orderServ;
+	}
 
 	@GetMapping("/test")
 	public @ResponseBody String test(){
 		
-		return "Endpoint works";
+		return "Orders Endpoint works";
 	}
 	
 	@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
-	public List<Order> getAllOrders() {
-	  return repository.findAll();
+	public @ResponseBody List<Order> getAllOrders() {
+	  return orderServ.findAll();
 	}
 	
 	
 	@PostMapping("/addOrder")
-	  Order newOrder(@RequestBody Order newOrder) {
-	    return repository.save(newOrder);
-	  }
+	public @ResponseBody Order newOrder(@RequestBody Order newOrder) {
+	  return orderServ.save(newOrder);
+	}
 	
 	//Sample Input
 //	{
