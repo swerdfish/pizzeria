@@ -59,6 +59,8 @@ public class OrderController {
 //	    "cost" : 12,
 //	    "size" : "SMALL"
 //	}],
+//	"customerIdString":"example",
+//	"setAsFavorite":false,
 //	"cost" : 12.0,
 //	"tip" : 0
 //	}

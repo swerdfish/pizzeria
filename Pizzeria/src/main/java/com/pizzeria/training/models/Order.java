@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,27 +29,25 @@ public class Order {
 	private String customerIdString;
 	private double cost;
 	private double tip;
-	@Transient
-	private Boolean setAsFavorite;	//Prevents from being added to the database
+	private boolean setAsFavorite;	//Prevents from being added to the database
 	
-	public Order() {}
-	
-	public Order(List<Pizza> pizzas, ObjectId customerId, double cost, double tip, Boolean favorite) {
+	public Order() {
 		super();
-		this.pizzas = pizzas;
-		this.customerIdString = customerId.toHexString();
-		this.cost = cost;
-		this.tip = tip;
-		this.setAsFavorite = favorite;
 	}
 	
-	public Order(List<Pizza> pizzas, String customerIdString, double cost, double tip, Boolean favorite) {
-		super();
+	@PersistenceConstructor
+	public Order(List<Pizza> pizzas, String customerIdString, Double cost, Double tip, Boolean setAsFavorite) {
+		this();
 		this.pizzas = pizzas;
 		this.customerIdString = customerIdString;
-		this.cost = cost;
-		this.tip = tip;
-		this.setAsFavorite = favorite;
+		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
+		this.tip = (tip != null ? tip : 0.0D);
+		this.setAsFavorite = (setAsFavorite != null ? setAsFavorite : false);
+		
+	}
+	
+	public Order(List<Pizza> pizzas, ObjectId customerId, Double cost, Double tip, Boolean setAsFavorite) {
+		this(pizzas, customerId.toHexString(), cost, tip, setAsFavorite);
 	}
 	
 	public List<Pizza> getPizzas() {
@@ -83,11 +82,11 @@ public class Order {
 		this.tip = tip;
 	}
 	
-	public Boolean getFavorite() {
+	public boolean getFavorite() {
 		return setAsFavorite;
 	}
 	
-	public void setFavorite(Boolean favorite) {
+	public void setFavorite(boolean favorite) {
 		this.setAsFavorite = favorite;
 	}
 
@@ -100,8 +99,8 @@ public class Order {
 		temp = Double.doubleToLongBits(cost);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((customerIdString == null) ? 0 : customerIdString.hashCode());
-		result = prime * result + ((setAsFavorite == null) ? 0 : setAsFavorite.hashCode());
 		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
+		result = prime * result + (setAsFavorite ? 1231 : 1237);
 		temp = Double.doubleToLongBits(tip);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
@@ -128,15 +127,12 @@ public class Order {
 				return false;
 		} else if (!customerIdString.equals(other.customerIdString))
 			return false;
-		if (setAsFavorite == null) {
-			if (other.setAsFavorite != null)
-				return false;
-		} else if (!setAsFavorite.equals(other.setAsFavorite))
-			return false;
 		if (pizzas == null) {
 			if (other.pizzas != null)
 				return false;
 		} else if (!pizzas.equals(other.pizzas))
+			return false;
+		if (setAsFavorite != other.setAsFavorite)
 			return false;
 		if (Double.doubleToLongBits(tip) != Double.doubleToLongBits(other.tip))
 			return false;
