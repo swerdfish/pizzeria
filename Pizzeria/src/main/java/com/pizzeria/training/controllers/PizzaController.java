@@ -42,10 +42,15 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/addPizza")
-	  Pizza newCustomer(@RequestBody Pizza newPizza) {
+	public Pizza newCustomer(@RequestBody Pizza newPizza) {
 	    return pizzaServ.save(newPizza);
 	  }
-	
+	 
+	//Filters by field, just type one field, and it should find the respective pizza
+	@GetMapping("/byExample")
+	public List<Pizza> getAllByExample(@RequestBody Pizza pizza){
+		return pizzaServ.getAllByExample(pizza);
+	}
 	//Sample input for postman
 //	{
 //	    "height": 13.0,
