@@ -48,8 +48,14 @@ public class CustomerController {
 //		{
 //		    "id" : 123141,
 //		    "phoneNum": 123141,
-//		    "email": "teodelson",
-//		    "address": "Sampleinasd",
+//		    "address": {
+//				"streetAddress":"123 West st",
+//				"streetAddress2":"",
+//				"city":"Chicago",
+//				"state":"IL",
+//				"postal":"60111"
+//			},
+//		    "email":"sample@mail.com",
 //		    "creditCard":1111
 //		}
 		
