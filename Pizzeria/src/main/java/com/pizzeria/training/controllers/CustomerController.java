@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,8 +41,13 @@ public class CustomerController {
 		}
 		
 		@PostMapping("/addCustomer")
-		 public @ResponseBody Customer newCustomer(@RequestBody Customer newCustomer) {
+		public @ResponseBody Customer newCustomer(@RequestBody Customer newCustomer) {
 		    return custServ.save(newCustomer);
+		}
+		
+		@GetMapping("/byCity")
+		public List<Customer> getAllByCity(@RequestParam(name = "city") String city){
+			return custServ.getAllByCity(city);
 		}
 
 //Sample input postman

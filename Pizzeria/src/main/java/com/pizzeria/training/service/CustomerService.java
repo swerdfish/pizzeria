@@ -48,4 +48,8 @@ public class CustomerService {
 			throw new Exception("Target customer's favorite order did not properly update.");
 		}
 	}
+
+	public List<Customer> getAllByCity(String city) {
+		return custRepo.findByAddressCity(city);
+	}
 }
