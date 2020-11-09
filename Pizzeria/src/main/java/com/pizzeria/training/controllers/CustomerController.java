@@ -56,7 +56,11 @@ public class CustomerController {
 //				"postal":"60111"
 //			},
 //		    "email":"sample@mail.com",
-//		    "creditCard":1111
+//		    "creditCard": {
+//				"cardNumber":1234123412341234,
+//				"expiration":"05/25",
+//				"securityCode":123
+//			}
 //		}
 		
 		

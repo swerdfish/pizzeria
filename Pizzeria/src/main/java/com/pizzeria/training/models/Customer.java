@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "customers")
 public class Customer {
 	
-	private class HomeAddress {
+	private static class HomeAddress {
 		private String streetAddress;
 		private String streetAddressLine2;
 		private String city;
@@ -78,7 +78,6 @@ public class Customer {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + getEnclosingInstance().hashCode();
 			result = prime * result + ((city == null) ? 0 : city.hashCode());
 			result = prime * result + ((postal == null) ? 0 : postal.hashCode());
 			result = prime * result + ((state == null) ? 0 : state.hashCode());
@@ -96,8 +95,6 @@ public class Customer {
 			if (getClass() != obj.getClass())
 				return false;
 			HomeAddress other = (HomeAddress) obj;
-			if (!getEnclosingInstance().equals(other.getEnclosingInstance()))
-				return false;
 			if (city == null) {
 				if (other.city != null)
 					return false;
@@ -125,17 +122,16 @@ public class Customer {
 				return false;
 			return true;
 		}
-
-		private Customer getEnclosingInstance() {
-			return Customer.this;
-		}
 	}
 	
-	private class PaymentCard {
+	private static class PaymentCard {
 		// TODO Implement hashing or some other kind of security for this information 
 		private long cardNumber;
 		private String expiration;
 		private short securityCode;
+		
+		public PaymentCard() {
+		}
 		
 		public PaymentCard(long cardNumber, String expiration, short securityCode) {
 			super();
@@ -172,7 +168,6 @@ public class Customer {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + getEnclosingInstance().hashCode();
 			result = prime * result + (int) (cardNumber ^ (cardNumber >>> 32));
 			result = prime * result + ((expiration == null) ? 0 : expiration.hashCode());
 			result = prime * result + securityCode;
@@ -188,8 +183,6 @@ public class Customer {
 			if (getClass() != obj.getClass())
 				return false;
 			PaymentCard other = (PaymentCard) obj;
-			if (!getEnclosingInstance().equals(other.getEnclosingInstance()))
-				return false;
 			if (cardNumber != other.cardNumber)
 				return false;
 			if (expiration == null) {
@@ -200,10 +193,6 @@ public class Customer {
 			if (securityCode != other.securityCode)
 				return false;
 			return true;
-		}
-
-		private Customer getEnclosingInstance() {
-			return Customer.this;
 		}
 
 		@Override
