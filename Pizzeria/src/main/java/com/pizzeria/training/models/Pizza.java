@@ -11,7 +11,7 @@ public class Pizza {
 	@Id
 	public ObjectId _id;
 	
-	private Float height;
+	private float height;
 	private PizzaType type;
 	private List<Toppings> toppings;
 	private double cost;
@@ -19,7 +19,7 @@ public class Pizza {
 	
 	public Pizza() {}
 	
-	public Pizza(float height, PizzaType type, List<Toppings> toppings, int cost, Size size) {
+	public Pizza(float height, PizzaType type, List<Toppings> toppings, double cost, Size size) {
 		super();
 		this.height = height;
 		this.type = type;
@@ -27,6 +27,11 @@ public class Pizza {
 		this.cost = cost;
 		this.size = size;
 	}
+	
+	public ObjectId get_id() {
+		return _id;
+	}
+
 	public float getHeight() {
 		return height;
 	}
@@ -48,8 +53,7 @@ public class Pizza {
 	public double getCost() {
 		return cost;
 	}
-
-	public void setCost(int cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
 	}
 	public Size getSize() {
@@ -63,6 +67,7 @@ public class Pizza {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((_id == null) ? 0 : _id.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(cost);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -82,6 +87,11 @@ public class Pizza {
 		if (getClass() != obj.getClass())
 			return false;
 		Pizza other = (Pizza) obj;
+		if (_id == null) {
+			if (other._id != null)
+				return false;
+		} else if (!_id.equals(other._id))
+			return false;
 		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
 			return false;
 		if (Float.floatToIntBits(height) != Float.floatToIntBits(other.height))

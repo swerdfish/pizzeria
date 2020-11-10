@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="2427" started-at="2020-11-10T21:14:18Z" finished-at="2020-11-10T21:14:21Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="2427" started-at="2020-11-10T21:14:18Z" finished-at="2020-11-10T21:14:21Z">
+      <class name="com.pizzeria.training.repositories.PizzaRepositoryTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="12" started-at="2020-11-10T21:14:18Z" finished-at="2020-11-10T21:14:18Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="2225" started-at="2020-11-10T21:14:18Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-11-10T21:14:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="3" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryTest.findAll()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="findAll()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="findAll" duration-ms="155" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- findAll -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryTest.findAll()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="save()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="save" duration-ms="12" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryTest.save()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:20Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryTest.save()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryTest@480d3575]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-11-10T21:14:20Z" finished-at="2020-11-10T21:14:21Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.pizzeria.training.repositories.PizzaRepositoryTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
