@@ -30,7 +30,7 @@ import com.pizzeria.training.repository.PizzaRepository;
  */
 @ExtendWith(SpringExtension.class)
 @DataMongoTest
-public class PizzaRepositoryTest extends AbstractTestNGSpringContextTests{
+public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextTests{
 	
 	@Autowired
 	PizzaRepository pizzaRepo;

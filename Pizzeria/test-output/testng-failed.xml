@@ -3,16 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.pizzeria.training.repositories.PizzaRepositoryTest">
+      <class name="com.pizzeria.training.services.PizzaServiceTest">
         <methods>
-          <include name="springTestContextBeforeTestClass"/>
           <include name="findAll"/>
-          <include name="springTestContextPrepareTestInstance"/>
-          <include name="springTestContextAfterTestClass"/>
-          <include name="springTestContextBeforeTestMethod"/>
-          <include name="springTestContextAfterTestMethod"/>
+          <include name="save"/>
+          <include name="mockSetup"/>
         </methods>
-      </class> <!-- com.pizzeria.training.repositories.PizzaRepositoryTest -->
+      </class> <!-- com.pizzeria.training.services.PizzaServiceTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
