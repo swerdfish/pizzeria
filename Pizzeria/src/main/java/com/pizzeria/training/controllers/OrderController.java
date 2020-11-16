@@ -30,19 +30,18 @@ public class OrderController {
 	}
 
 	@GetMapping("/test")
-	public @ResponseBody String test(){
-		
+	public String test(){
 		return "Orders Endpoint works";
 	}
 	
-	@RequestMapping(value = "/getOrders", method = RequestMethod.GET)
-	public @ResponseBody List<Order> getAllOrders() {
+	@GetMapping
+	public List<Order> getAllOrders() {
 	  return orderServ.findAll();
 	}
 	
 	
 	@PostMapping("/addOrder")
-	public @ResponseBody Order newOrder(@RequestBody Order newOrder) {
+	public Order newOrder(@RequestBody Order newOrder) {
 		return orderServ.save(newOrder);
 		
 	}
