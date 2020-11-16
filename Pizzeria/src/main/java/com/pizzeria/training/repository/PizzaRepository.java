@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.pizzeria.training.models.Pizza;
 
 @Repository
-public interface PizzaRepository extends MongoRepository<Pizza, Float>{
+public interface PizzaRepository extends MongoRepository<Pizza, ObjectId>{
 
 	Pizza findBy_id(ObjectId id);
 }

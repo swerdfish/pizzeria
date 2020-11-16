@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="com.pizzeria.training.services.PizzaServiceTest">
+        <methods>
+          <include name="findAll"/>
+          <include name="save"/>
+          <include name="mockSetup"/>
+        </methods>
+      </class> <!-- com.pizzeria.training.services.PizzaServiceTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

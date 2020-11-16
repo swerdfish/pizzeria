@@ -6,6 +6,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,6 +19,7 @@ import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.service.CustomerService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/customers")
 public class CustomerController {
 
@@ -83,11 +85,6 @@ public class CustomerController {
 		return outputSb.toString().trim();
 	}
 		
-//		@GetMapping("/byCity")
-//		public List<Customer> getAllByCity(@RequestParam(name = "city") String city){
-//			return custServ.getAllByCity(city);
-//		}
-
 //Sample input postman
 //		{
 //		    "id" : 123141,
@@ -106,6 +103,5 @@ public class CustomerController {
 //				"securityCode":123
 //			}
 //		}
-		
 		
 }
