@@ -220,6 +220,14 @@ public class Customer {
 	public void setFavoriteOrder(List<Pizza> favoriteOrder) {
 		this.favoriteOrder = favoriteOrder;
 	}
+	
+	public ObjectId get_id() {
+		return _id;
+	}
+	
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
 
 	public long getPhoneNum() {
 		return phoneNum;

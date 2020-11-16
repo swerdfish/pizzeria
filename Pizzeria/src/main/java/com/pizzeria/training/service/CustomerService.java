@@ -32,6 +32,10 @@ public class CustomerService {
 		return custRepo.save(newCustomer);
 	}
 	
+	public void delete(Customer customer) {
+		custRepo.delete(customer);
+	}
+	
 	public List<Pizza> updateFavoriteOrder(ObjectId customerId, List<Pizza> newFavorite) throws Exception{
 		Customer target;
 		try {
@@ -51,5 +55,9 @@ public class CustomerService {
 
 	public List<Customer> getAllByCity(String city) {
 		return custRepo.findByAddressCity(city);
+	}
+	
+	public Customer getCustomerBy_id(ObjectId _id) {
+		return custRepo.findBy_id(_id);
 	}
 }
