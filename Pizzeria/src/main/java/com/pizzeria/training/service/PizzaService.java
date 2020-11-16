@@ -2,6 +2,7 @@ package com.pizzeria.training.service;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -38,5 +39,13 @@ public class PizzaService {
 		ExampleMatcher matcher = ExampleMatcher.matchingAny().withIgnoreCase().withMatcher("height", GenericPropertyMatcher.of(StringMatcher.EXACT));
 		Example<Pizza> example = Example.of(pizza, matcher);
 		return pizzaRepo.findAll(example);
+	}
+
+	public Pizza findBy_id(ObjectId _id) {
+		return pizzaRepo.findBy_id(_id);
+	}
+
+	public void delete(Pizza pizzaToDelete) {
+		pizzaRepo.delete(pizzaToDelete);
 	}
 }

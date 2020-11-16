@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.pizzeria.training.models.Customer;
 
 @Repository
-public interface CustomerRepository extends MongoRepository<Customer, Integer> {
+public interface CustomerRepository extends MongoRepository<Customer, ObjectId> {
 
 	Customer findBy_id(ObjectId id);
 

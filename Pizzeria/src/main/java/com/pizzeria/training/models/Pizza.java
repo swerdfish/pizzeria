@@ -31,7 +31,11 @@ public class Pizza {
 	public ObjectId get_id() {
 		return _id;
 	}
-
+	
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
+	
 	public float getHeight() {
 		return height;
 	}
