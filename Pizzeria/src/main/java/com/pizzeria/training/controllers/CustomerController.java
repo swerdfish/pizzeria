@@ -1,6 +1,7 @@
 package com.pizzeria.training.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Customer;
+import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.service.CustomerService;
 
 @RestController
@@ -48,6 +50,17 @@ public class CustomerController {
 		@GetMapping("/byCity")
 		public List<Customer> getAllByCity(@RequestParam(name = "city") String city){
 			return custServ.getAllByCity(city);
+		}
+		@GetMapping("/byExample")
+		public List<Customer> getAllByExample(@RequestBody Customer customer){
+			return custServ.getAllByExample(customer);
+		}
+		
+		@GetMapping("/page")
+		public Map<String, Object> getAllCustomersInPage(@RequestParam(name="pageNo",defaultValue = "0") int pageNo,
+														 @RequestParam(name="pageSize",defaultValue = "2") int pageSize,
+														 @RequestParam(name="sortBy",defaultValue = "_id") String sortBy){
+			return custServ.getAllCustomersInPage(pageNo,pageSize,sortBy);
 		}
 
 //Sample input postman
