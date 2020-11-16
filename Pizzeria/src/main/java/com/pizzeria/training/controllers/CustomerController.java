@@ -37,10 +37,14 @@ public class CustomerController {
 		return "Customer Endpoint works";
 	}
 	
+	// CREATE
+	
 	@PostMapping
 	public Customer newCustomer(@RequestBody Customer newCustomer) {
 	    return custServ.save(newCustomer);
 	}
+	
+	// READ
 	 
 	@GetMapping
 	public List<Customer> getAllCustomer(@RequestParam(required=false) ObjectId _id, @RequestParam(required = false) String city) {
@@ -49,11 +53,15 @@ public class CustomerController {
 		return custServ.findAll();
 	}
 	
+	// UPDATE
+	
 	@PutMapping
 	public Customer updateCustomer(@RequestParam ObjectId _id, @RequestBody Customer updatedCustomer) {
 		updatedCustomer.set_id(_id);
 		return custServ.save(updatedCustomer);
 	}
+	
+	// DELETE
 	
 	@DeleteMapping
 	public void deleteCustomer(@RequestParam ObjectId _id) {

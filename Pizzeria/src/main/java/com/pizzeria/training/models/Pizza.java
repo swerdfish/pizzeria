@@ -27,6 +27,15 @@ public class Pizza {
 		this.cost = cost;
 		this.size = size;
 	}
+	
+	public ObjectId get_id() {
+		return _id;
+	}
+	
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
+	
 	public float getHeight() {
 		return height;
 	}

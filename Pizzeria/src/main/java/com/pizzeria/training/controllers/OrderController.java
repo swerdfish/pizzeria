@@ -37,10 +37,14 @@ public class OrderController {
 		return "Orders Endpoint works";
 	}
 	
+	// CREATE
+	
 	@PostMapping
 	public Order newOrder(@RequestBody Order newOrder) {
 		return orderServ.save(newOrder);
 	}
+	
+	// READ
 	
 	@GetMapping
 	public List<Order> getAllOrders(@RequestParam(required=false) ObjectId _id) {
@@ -48,11 +52,15 @@ public class OrderController {
 		return orderServ.findAll();
 	}
 	
+	// UPDATE
+	
 	@PutMapping
 	public Order updateOrder(@RequestParam ObjectId _id, @RequestBody Order updateOrder) {
 		updateOrder.set_id(_id);
 		return orderServ.save(updateOrder);
 	}
+	
+	// DELETE
 	
 	@DeleteMapping
 	public void deleteOrder(@RequestParam ObjectId _id) {

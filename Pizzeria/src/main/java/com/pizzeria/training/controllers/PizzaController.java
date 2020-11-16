@@ -1,21 +1,24 @@
 package com.pizzeria.training.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.service.PizzaService;
 
 @RestController
-@RequestMapping("/pizza")
+@RequestMapping("/pizzas")
 public class PizzaController {
 
 	@Autowired
@@ -31,26 +34,44 @@ public class PizzaController {
 	}
 
 	@GetMapping("/test")
-	public @ResponseBody String getAllOrders(){
+	public String getAllOrders(){
 		
 		return "Pizza Endpoint works";
 	}
-	 
-	@RequestMapping(value = "/getPizza", method = RequestMethod.GET)
-	public List<Pizza> getAllCustomer() {
-	  return pizzaServ.findAll();
+	
+	// CREATE
+	
+	@PostMapping
+	public Pizza newPizza(@RequestBody Pizza newPizza) {
+	    return pizzaServ.save(newPizza);
 	}
 	
-	@PostMapping("/addPizza")
-	public Pizza newCustomer(@RequestBody Pizza newPizza) {
-	    return pizzaServ.save(newPizza);
-	  }
-	 
-	//Filters by field, just type one field, and it should find the respective pizza
-	@GetMapping("/byExample")
-	public List<Pizza> getAllByExample(@RequestBody Pizza pizza){
-		return pizzaServ.getAllByExample(pizza);
+	// READ
+	
+	// Passing in pizza request body filters by field, just type one field, and it should find the respective pizza
+	@GetMapping
+	public List<Pizza> getAllCustomer(@RequestParam(required = false) ObjectId _id, @RequestBody(required=false) Pizza pizza) {
+		if (_id != null) return Collections.singletonList(pizzaServ.findBy_id(_id));
+		if (pizza != null) return pizzaServ.getAllByExample(pizza);
+		return pizzaServ.findAll();
 	}
+	
+	// UPDATE
+	
+	@PutMapping
+	public Pizza updatePizza(@RequestParam ObjectId _id, @RequestBody Pizza updatePizza) {
+		updatePizza.set_id(_id);
+		return pizzaServ.save(updatePizza);
+	}
+	
+	// DELETE
+	
+	@DeleteMapping
+	public void deletePizza(@RequestParam ObjectId _id) {
+		Pizza pizzaToDelete = pizzaServ.findBy_id(_id);
+		pizzaServ.delete(pizzaToDelete);
+	}
+	 
 	//Sample input for postman
 //	{
 //	    "height": 13.0,
