@@ -52,7 +52,7 @@ public class PizzaController {
 	
 	// Passing in pizza request body filters by field, just type one field, and it should find the respective pizza
 	@GetMapping
-	public List<Pizza> getAllCustomer(@RequestParam(required = false) ObjectId _id, @RequestBody(required=false) Pizza pizza) {
+	public List<Pizza> getAllPizza(@RequestParam(required = false) ObjectId _id, @RequestBody(required=false) Pizza pizza) {
 		if (_id != null) return Collections.singletonList(pizzaServ.findBy_id(_id));
 		if (pizza != null) return pizzaServ.getAllByExample(pizza);
 		return pizzaServ.findAll();
