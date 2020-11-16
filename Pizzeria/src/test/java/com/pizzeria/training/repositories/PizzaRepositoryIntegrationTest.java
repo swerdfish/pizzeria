@@ -10,10 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
@@ -28,7 +26,6 @@ import com.pizzeria.training.repository.PizzaRepository;
  * @author stephen.gruver
  *
  */
-@ExtendWith(SpringExtension.class)
 @DataMongoTest
 public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextTests{
 	

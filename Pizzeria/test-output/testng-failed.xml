@@ -5,9 +5,14 @@
     <classes>
       <class name="com.pizzeria.training.services.PizzaServiceTest">
         <methods>
+          <include name="springTestContextBeforeTestClass"/>
           <include name="findAll"/>
           <include name="save"/>
+          <include name="springTestContextPrepareTestInstance"/>
+          <include name="springTestContextAfterTestClass"/>
+          <include name="springTestContextBeforeTestMethod"/>
           <include name="mockSetup"/>
+          <include name="springTestContextAfterTestMethod"/>
         </methods>
       </class> <!-- com.pizzeria.training.services.PizzaServiceTest -->
     </classes>

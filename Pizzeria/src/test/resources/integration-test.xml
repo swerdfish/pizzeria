@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="Integration" verbose="1" >
+	<test name="RepoIntegration">
+		<packages>
+      		<package name="com.pizzeria.training.repositories" />
+    	</packages>
+  	</test>
+  	
+  	<test name="ControllerIntegration">
+  		<packages>
+  			<package name="com.pizzeria.training.controllers" />
+  		</packages>
+  	</test>
+</suite>
