@@ -43,4 +43,12 @@ public class OrderService {
 		}
 		return orderRepo.save(newOrder);
 	}
+
+	public Order getOrderBy_id(ObjectId _id) {
+		return orderRepo.findBy_id(_id);
+	}
+	
+	public void delete(Order orderToDelete) {
+		orderRepo.delete(orderToDelete);
+	}
 }
