@@ -66,8 +66,8 @@ public class OrderController {
 	}
 	
 	@PutMapping("/completeOrder")
-	public ResponseEntity<String> completeOrder(@RequestBody ObjectId orderId) {
-		return orderServ.updateStatus(orderId);
+	public ResponseEntity<String> completeOrder(@RequestBody String orderId) {
+		return orderServ.updateStatus(new ObjectId(orderId));
 	}
 	
 	@GetMapping("/getOrdersByStatus/{orderStatus}")
