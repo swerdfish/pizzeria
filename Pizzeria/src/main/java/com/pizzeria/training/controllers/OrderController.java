@@ -57,6 +57,11 @@ public class OrderController {
 		return orderServ.findAll();
 	}
 	
+	@PostMapping("/examples")
+	public List<Order> getAllOrderByExample(@RequestBody Order order) {
+		return orderServ.getAllByExample(order);
+	}
+	
 	// UPDATE
 	
 	@PutMapping

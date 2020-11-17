@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Order;
@@ -81,4 +83,9 @@ public class OrderService {
 		orderRepo.delete(orderToDelete);
 	}
 
+	public List<Order> getAllByExample(Order order) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Order> example = Example.of(order, matcher);
+		return orderRepo.findAll(example);
+	}
 }

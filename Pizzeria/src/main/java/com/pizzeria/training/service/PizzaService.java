@@ -36,7 +36,7 @@ public class PizzaService {
 	}
 
 	public List<Pizza> getAllByExample(Pizza pizza) {
-		ExampleMatcher matcher = ExampleMatcher.matchingAny().withIgnoreCase().withMatcher("height", GenericPropertyMatcher.of(StringMatcher.EXACT));
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase().withMatcher("height", GenericPropertyMatcher.of(StringMatcher.EXACT));
 		Example<Pizza> example = Example.of(pizza, matcher);
 		return pizzaRepo.findAll(example);
 	}

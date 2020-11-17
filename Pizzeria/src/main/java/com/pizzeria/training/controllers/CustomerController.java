@@ -55,6 +55,11 @@ public class CustomerController {
 		return custServ.findAll();
 	}
 	
+	@PostMapping("/examples")
+	public List<Customer> getAllCustomersByExample(@RequestBody Customer customer) {
+		return custServ.findAllByExample(customer);
+	}
+	
 	// UPDATE
 	
 	@PutMapping
@@ -87,7 +92,6 @@ public class CustomerController {
 		
 //Sample input postman
 //		{
-//		    "id" : 123141,
 //		    "phoneNum": 123141,
 //		    "address": {
 //				"streetAddress":"123 West st",
