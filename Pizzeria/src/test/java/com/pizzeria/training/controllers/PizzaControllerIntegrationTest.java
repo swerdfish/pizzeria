@@ -57,7 +57,7 @@ public class PizzaControllerIntegrationTest extends AbstractTestNGSpringContextT
 			System.out.println("mvc not injected");
 			fail();
 		}
-        mvc.perform(get("/pizza/test")).andExpect(status().isOk())
+        mvc.perform(get("/pizzas/test")).andExpect(status().isOk())
         								.andExpect(content().string("Pizza Endpoint works"));
     }
 	
@@ -65,7 +65,7 @@ public class PizzaControllerIntegrationTest extends AbstractTestNGSpringContextT
 	void getAll() throws Exception {
 		List<Pizza> pizzaList = new ArrayList<Pizza>(Arrays.asList(testPizza));
 		when(pizzaServ.findAll()).thenReturn(pizzaList);
-		mvc.perform(get("/pizza/getPizza")).andExpect(status().isOk())
+		mvc.perform(get("/pizzas")).andExpect(status().isOk())
 										.andExpect(jsonPath("$.[0].height", is(5.0)))
 										.andExpect(jsonPath("$.[0].type", is("CLASSIC")))
 										.andExpect(jsonPath("$.[0].cost", is(10.0)))
