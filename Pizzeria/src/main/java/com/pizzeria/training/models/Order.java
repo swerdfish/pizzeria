@@ -29,10 +29,11 @@ public class Order {
 	private double cost;
 	private double tip;
 	private boolean setAsFavorite;	//Prevents from being added to the database
-	private String orderStatus;
+	private OrderStatus orderStatus;
 	
 	public Order() {
 		super();
+		this.orderStatus = OrderStatus.IN_PROGRESS;
 	}
 	
 	@PersistenceConstructor
@@ -43,7 +44,7 @@ public class Order {
 		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
 		this.tip = (tip != null ? tip : 0.0D);
 		this.setAsFavorite = (setAsFavorite != null ? setAsFavorite : false);
-		this.orderStatus = "In Progress";
+		this.orderStatus = OrderStatus.IN_PROGRESS;
 		
 	}
 	
@@ -99,12 +100,12 @@ public class Order {
 		this.setAsFavorite = setAsFavorite;
 	}
 
-	public String getOrderStatus() {
+	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
 
 	public void setOrderStatus() {
-		this.orderStatus = "Complete";
+		this.orderStatus = OrderStatus.COMPLETED;
 	}
 
 	@Override

@@ -7,9 +7,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Order;
+import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.service.OrderService;
 
 @RestController
@@ -70,20 +72,17 @@ public class OrderController {
 		return orderServ.save(updateOrder);
 	}
 	
-	@PutMapping("/completeOrder")
-	public ResponseEntity<String> completeOrder(@RequestBody String orderId) {
+	@PatchMapping(path="/{orderId}")
+	public ResponseEntity<String> completeOrder(@PathVariable("orderId") String orderId) {
 		return orderServ.updateStatus(new ObjectId(orderId));
 	}
 	
-	@GetMapping("/getOrdersByStatus/{orderStatus}")
-	public ResponseEntity<List<Order>> getOrdersByStatus(@PathVariable String orderStatus) {
-		
-		if (!orderStatus.equals("Complete") || !orderStatus.equals("In Progress")) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		}
-		
+	@GetMapping(path="/{orderStatus}")
+	public ResponseEntity<List<Order>> getOrdersByStatus(@PathVariable("orderStatus") String orderStatus) {
 		try {
-			return new ResponseEntity<>(orderServ.getOrdersByStatus(orderStatus), HttpStatus.OK);			
+			return new ResponseEntity<>(orderServ.getOrdersByStatus(OrderStatus.valueOf(orderStatus)), HttpStatus.OK);			
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

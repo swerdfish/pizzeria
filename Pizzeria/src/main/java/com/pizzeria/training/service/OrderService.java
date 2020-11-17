@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Order;
+import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.repository.OrdersRepository;
 
 @Service
@@ -67,9 +68,9 @@ public class OrderService {
 		return new ResponseEntity<>("Successfully updated the order status!", HttpStatus.OK);
 	}
 	
-	public List<Order> getOrdersByStatus(String orderStatus) {
+	public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("orderStatus").is(orderStatus));
+		query.addCriteria(Criteria.where("orderStatus").is(orderStatus.toString()));
 		List<Order> filteredOrders = mongoTemplate.find(query, Order.class);
 		
 		return filteredOrders;
