@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Customer;
@@ -59,5 +61,11 @@ public class CustomerService {
 	
 	public Customer getCustomerBy_id(ObjectId _id) {
 		return custRepo.findBy_id(_id);
+	}
+
+	public List<Customer> findAllByExample(Customer customer) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Customer> example = Example.of(customer, matcher);
+		return custRepo.findAll(example);
 	}
 }

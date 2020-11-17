@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Order;
@@ -50,5 +52,11 @@ public class OrderService {
 	
 	public void delete(Order orderToDelete) {
 		orderRepo.delete(orderToDelete);
+	}
+
+	public List<Order> getAllByExample(Order order) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Order> example = Example.of(order, matcher);
+		return orderRepo.findAll(example);
 	}
 }
