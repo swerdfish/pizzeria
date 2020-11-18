@@ -205,7 +205,7 @@ public class Customer {
 	@Id
 	public ObjectId _id;
 	
-	private long phoneNum;
+	private Long phoneNum;
 	private String email;
 	private HomeAddress address;
 	private PaymentCard card;
