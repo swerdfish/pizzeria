@@ -7,18 +7,38 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "customers")
+/**
+ * Customer class.
+ * Contains a nested home address and payment card class.
+ */
 public class Customer {
-	
+	/**
+	 * Home Address class.
+	 */
 	private static class HomeAddress {
+		/** line 1 of street address */
 		private String streetAddress;
+		/** line 2 of street address */
 		private String streetAddressLine2;
+		/** city of residence */
 		private String city;
+		/** state of residence */
 		private String state;
+		/** postal/zip code */
 		private String postal;
-		
+		/**
+		 * Home address default constructor
+		 */
 		public HomeAddress() {
 		}
-		
+		/**
+		 * Home address parameterized constructor
+		 * @param streetAddress street address line 1
+		 * @param streetAddressLine2 street address line 2
+		 * @param city city of the address
+		 * @param state state of the address
+		 * @param postal postal/zip code
+		 */
 		public HomeAddress(String streetAddress, String streetAddressLine2, String city, String state, String postal) {
 			super();
 			this.streetAddress = streetAddress;
@@ -27,53 +47,88 @@ public class Customer {
 			this.state = state;
 			this.postal = postal;
 		}
-
+		/**
+		 * retrieve street address
+		 * @return street address line 1
+		 */
 		public String getStreetAddress() {
 			return streetAddress;
 		}
-
+		/**
+		 * set street address
+		 * @param streetAddress String: new street address line 1
+		 */
 		public void setStreetAddress(String streetAddress) {
 			this.streetAddress = streetAddress;
 		}
-
+		/**
+		 * retrieve street address line 2
+		 * @return street address line 2
+		 */
 		public String getStreetAddressLine2() {
 			return streetAddressLine2;
 		}
-
+		/**
+		 * set street address line 2
+		 * @param streetAddressLine2 String: new street address line 2
+		 */
 		public void setStreetAddressLine2(String streetAddressLine2) {
 			this.streetAddressLine2 = streetAddressLine2;
 		}
-
+		/**
+		 * retrieve city 
+		 * @return city
+		 */
 		public String getCity() {
 			return city;
 		}
-
+		/**
+		 * set city
+		 * @param city String: new city
+		 */
 		public void setCity(String city) {
 			this.city = city;
 		}
-
+		/**
+		 * retrieve state
+		 * @return state
+		 */
 		public String getState() {
 			return state;
 		}
-
+		/**
+		 * set state
+		 * @param state String: new state
+		 */
 		public void setState(String state) {
 			this.state = state;
 		}
-
+		/**
+		 * Postal code getter method
+		 * @return postal code
+		 */
 		public String getPostal() {
 			return postal;
 		}
-
+		/**
+		 * Postal code setter method
+		 * @param postal: new postal code
+		 */
 		public void setPostal(String postal) {
 			this.postal = postal;
 		}
-
+		/**
+		 * toString override method
+		 * @return address information as a formatted string
+		 */
 		@Override
 		public String toString() {
 			return "Address [\n\tstreetAddress=" + streetAddress + "\n\tstreetAddressLine2=" + streetAddressLine2 + "\n\tcity="
 					+ city + "\n\tstate=" + state + "\n\tpostal=" + postal + "\n]";
 		}
-
+		/**
+		 * hashCode override method
+		 */
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -85,7 +140,10 @@ public class Customer {
 			result = prime * result + ((streetAddressLine2 == null) ? 0 : streetAddressLine2.hashCode());
 			return result;
 		}
-
+		/**
+		 * equals override method
+		 * @return Boolean value of whether the two compared objects are equal
+		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -123,47 +181,79 @@ public class Customer {
 			return true;
 		}
 	}
-	
+	/**
+	 * Payment card class
+	 */
 	private static class PaymentCard {
 		// TODO Implement hashing or some other kind of security for this information 
+		/** card number*/
 		private long cardNumber;
+		/** card expiration date */
 		private String expiration;
+		/** card security code */
 		private short securityCode;
-		
+		/**
+		 * Payment card default constructor
+		 */
 		public PaymentCard() {
 		}
-		
+		/**
+		 * Payment card parameterized constructor
+		 * @param cardNumber card number
+		 * @param expiration card expiration date
+		 * @param securityCode card security code
+		 */
 		public PaymentCard(long cardNumber, String expiration, short securityCode) {
 			super();
 			this.cardNumber = cardNumber;
 			this.expiration = expiration;
 			this.securityCode = securityCode;
 		}
-
+		/**
+		 * retrieve card number
+		 * @return card number
+		 */
 		public long getCardNumber() {
 			return cardNumber;
 		}
-
+		/**
+		 * set card number
+		 * @param cardNumber long: new card number
+		 */
 		public void setCardNumber(long cardNumber) {
 			this.cardNumber = cardNumber;
 		}
-
+		/**
+		 * retrieve card expiration date getter method
+		 * @return card expiration date
+		 */
 		public String getExpiration() {
 			return expiration;
 		}
-
+		/**
+		 * set card expiration date
+		 * @param expiration String: new card expiration date
+		 */
 		public void setExpiration(String expiration) {
 			this.expiration = expiration;
 		}
-
+		/**
+		 * retrieve card security code
+		 * @return card security code
+		 */
 		public short getSecurityCode() {
 			return securityCode;
 		}
-
+		/**
+		 * set card security code
+		 * @param securityCode short: new card security code
+		 */
 		public void setSecurityCode(short securityCode) {
 			this.securityCode = securityCode;
 		}
-
+		/**
+		 * hashCode override method
+		 */
 		@Override
 		public int hashCode() {
 			final int prime = 31;
@@ -173,7 +263,10 @@ public class Customer {
 			result = prime * result + securityCode;
 			return result;
 		}
-
+		/**
+		 * equals override method
+		 * @return Boolean value of whether the two compared objects are equal
+		 */
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj)
@@ -194,7 +287,10 @@ public class Customer {
 				return false;
 			return true;
 		}
-
+		/**
+		 * toString override method
+		 * @return card information as a formatted string
+		 */
 		@Override
 		public String toString() {
 			return "PaymentCard [\n\tcardNumber=" + cardNumber + "\n\texpiration=" + expiration + "\n\tsecurityCode="
@@ -202,61 +298,114 @@ public class Customer {
 		}
 	}
 	
+	/**unique ID*/
 	@Id
-	public ObjectId _id;
-	
-	private long phoneNum;
-	private String email;
-	private HomeAddress address;
-	private PaymentCard card;
-	private List<Pizza> favoriteOrder;
-	
+	public ObjectId _id; 
+	/**Phone number*/
+	private long phoneNum; 
+	/**Email*/
+	private String email; 
+	/**home address*/
+	private HomeAddress address; 
+	/**credit card*/
+	private PaymentCard card; 
+	/**list of favorite orders*/
+	private List<Pizza> favoriteOrder; 
+	/**
+	 * Customer default constructor
+	 */
 	public Customer() {}
-
+	/**
+	 * Retrieve customer favorite orders
+	 * @return list of the customer's favorite orders
+	 */
 	public List<Pizza> getFavoriteOrder() {
 		return favoriteOrder;
 	}
-
+	/**
+	 * set customer favorite orders
+	 * @param favoriteOrder List(Pizza): new favorite orders
+	 */
 	public void setFavoriteOrder(List<Pizza> favoriteOrder) {
 		this.favoriteOrder = favoriteOrder;
 	}
-	
+	/**
+	 * retrieve customer unique ID
+	 * @return customer's unique ID
+	 */
 	public ObjectId get_id() {
 		return _id;
 	}
-	
+	/**
+	 * set customer unique ID
+	 * @param _id ObjectId: new customer ID
+	 */
 	public void set_id(ObjectId _id) {
 		this._id = _id;
 	}
-
+	/**
+	 * retrieve customer phone number
+	 * @return customer's phone number
+	 */
 	public long getPhoneNum() {
 		return phoneNum;
 	}
+	/**
+	 * set customer phone number
+	 * @param phoneNum long: new phone number
+	 */
 	public void setPhoneNum(long phoneNum) {
 		this.phoneNum = phoneNum;
 	}
-	
+	/**
+	 * retrieve customer email address
+	 * @return customer's email address
+	 */
 	public String getEmail() {
 		return email;
 	}
+	/**
+	 * set customer email address
+	 * @param email String: new email address
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	/**
+	 * retrieve customer address
+	 * @return Customer's home address object
+	 */
 	public HomeAddress getAddress() {
 		return address;
 	}
+	/**
+	 * set customer address
+	 * @param address HomeAddress: new address
+	 */
 	public void setAddress(HomeAddress address) {
 		this.address = address;
 	}
-	
+	/**
+	 * retrieve customer card
+	 * @return Customer's payment card object
+	 */
 	public PaymentCard getCard() {
 		return card;
 	}
+	/**
+	 * set customer card
+	 * @param card PaymentCard: new payment card info
+	 */
 	public void setCard(PaymentCard card) {
 		this.card = card;
 	}
-	
+	/**
+	 * Customer parameterized constructor
+	 * @param phoneNum phone number
+	 * @param email email address
+	 * @param address home address object
+	 * @param card payment card object
+	 */
 	public Customer(long phoneNum, String email, HomeAddress address, PaymentCard card) {
 		super();
 		this.phoneNum = phoneNum;
@@ -264,6 +413,9 @@ public class Customer {
 		this.address = address;
 		this.card = card;
 	}
+	/**
+	 * hashCode override method
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -274,6 +426,10 @@ public class Customer {
 		result = prime * result + (int) (phoneNum ^ (phoneNum >>> 32));
 		return result;
 	}
+	/**
+	 * equals override method
+	 * @return Boolean value of whether the two compared objects are equal
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -302,7 +458,10 @@ public class Customer {
 			return false;
 		return true;
 	}
-
+	/**
+	 * toString override method
+	 * @return customer information as a formatted string
+	 */
 	@Override
 	public String toString() {
 		return "Customer [_id=" + _id + ", phoneNum=" + phoneNum + ", email=" + email + ", address=" + address
