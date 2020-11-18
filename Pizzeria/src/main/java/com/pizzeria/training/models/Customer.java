@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "customers")
 public class Customer {
-	
-	private static class HomeAddress {
+	//private : made public for dummy data - change soon to private if we don't need it in the future
+	public static class HomeAddress {
 		private String streetAddress;
 		private String streetAddressLine2;
 		private String city;
@@ -123,8 +123,8 @@ public class Customer {
 			return true;
 		}
 	}
-	
-	private static class PaymentCard {
+	//private : made public for dummy data : to be changed to private if we no longer need dummy data.
+	public static class PaymentCard {
 		// TODO Implement hashing or some other kind of security for this information 
 		private long cardNumber;
 		private String expiration;
