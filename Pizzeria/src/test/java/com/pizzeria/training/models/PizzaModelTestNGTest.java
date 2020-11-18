@@ -8,7 +8,9 @@ import static org.testng.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -45,12 +47,12 @@ public class PizzaModelTestNGTest {
 	@Test
 	public void allArgsConstructor() {
 		System.out.println("In @Test method: allArgsConstructor");
-		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
+		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON));
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
 		
 		assertEquals(testPizza.getClass(), Pizza.class);
 		assertEquals(testPizza.getType(), PizzaType.CLASSIC);
-		assertThat(testPizza.getToppings(), is(toppingList));	//Hamcrest library for collection evaluation
+		assertThat(testPizza.getToppings(), is(toppingSet));	//Hamcrest library for collection evaluation
 		assertEquals(testPizza.getSize(), Size.SMALL);
 		assertEquals(testPizza.getHeight(), 5.0f, 0.0f);
 		assertEquals(testPizza.getCost(), 10.0d, 0.0d);
@@ -59,18 +61,18 @@ public class PizzaModelTestNGTest {
 	@Test
 	public void setters() {
 		System.out.println("In @Test method: setters");
-		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.ARTICHOKE, Toppings.BASIL));
+		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.ARTICHOKE, Toppings.BASIL));
 		testPizza = new Pizza();
 		
 		testPizza.setCost(5.0d);
 		testPizza.setHeight(10.0f);
 		testPizza.setSize(Size.MEDIUM);
-		testPizza.setToppings(toppingList);
+		testPizza.setToppings(toppingSet);
 		testPizza.setType(PizzaType.DEEP_DISH);
 		
 		assertEquals(testPizza.getClass(), Pizza.class);
 		assertEquals(testPizza.getType(), PizzaType.DEEP_DISH);
-		assertThat(testPizza.getToppings(), is(toppingList));	//Hamcrest library for collection evaluation
+		assertThat(testPizza.getToppings(), is(toppingSet));	//Hamcrest library for collection evaluation
 		assertEquals(testPizza.getSize(), Size.MEDIUM);
 		assertEquals(testPizza.getHeight(), 10.0f, 0.0f);
 		assertEquals(testPizza.getCost(), 5.0d, 0.0d);
@@ -79,10 +81,10 @@ public class PizzaModelTestNGTest {
 	@Test
 	public void toStringTest() {
 		System.out.println("In @Test method: toStringTest");
-		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.BROCCOLI, Toppings.CARROT));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
+		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.BROCCOLI, Toppings.CARROT));
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
 		
-		String expected = "Pizza [height=" + 5.0f + ", type=" + PizzaType.CLASSIC + ", toppings=" + toppingList + 
+		String expected = "Pizza [height=" + 5.0f + ", type=" + PizzaType.CLASSIC + ", toppings=" + toppingSet + 
 				", cost=" + 10.0d + ", size=" + Size.SMALL + "]";
 		
 		assertEquals(testPizza.toString(), expected);
@@ -91,9 +93,9 @@ public class PizzaModelTestNGTest {
 	@Test
 	public void equalsHashcode() {
 		System.out.println("In @Test method: equalsHashCode");
-		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.CHEESE, Toppings.GARLIC));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
-		Pizza otherPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
+		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.CHEESE, Toppings.GARLIC));
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
+		Pizza otherPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
 		
 		assertEquals(testPizza, otherPizza);
 		

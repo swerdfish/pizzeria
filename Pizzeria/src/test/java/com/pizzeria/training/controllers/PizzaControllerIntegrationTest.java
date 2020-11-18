@@ -12,6 +12,7 @@ import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class PizzaControllerIntegrationTest extends AbstractTestNGSpringContextT
 	
 	private Pizza testPizza = 
 			new Pizza(5.0f, PizzaType.CLASSIC, 
-					new ArrayList<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON)), 
+					new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON)), 
 					10.0d, Size.SMALL);
 	
 	@BeforeMethod
