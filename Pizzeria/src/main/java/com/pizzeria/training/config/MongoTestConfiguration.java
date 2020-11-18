@@ -3,7 +3,6 @@ package com.pizzeria.training.config;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractMongoClientConfiguration;
 
 import com.mongodb.ConnectionString;

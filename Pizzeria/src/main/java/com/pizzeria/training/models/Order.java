@@ -29,9 +29,11 @@ public class Order {
 	private Double cost;
 	private Double tip;
 	private Boolean setAsFavorite;	//Prevents from being added to the database
+	private OrderStatus orderStatus;
 	
 	public Order() {
 		super();
+		this.orderStatus = OrderStatus.IN_PROGRESS;
 	}
 	
 	@PersistenceConstructor
@@ -42,6 +44,7 @@ public class Order {
 		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
 		this.tip = (tip != null ? tip : 0.0D);
 		this.setAsFavorite = (setAsFavorite != null ? setAsFavorite : false);
+		this.orderStatus = OrderStatus.IN_PROGRESS;
 		
 	}
 	
@@ -56,11 +59,11 @@ public class Order {
 	public void set_id(ObjectId _id) {
 		this._id = _id;
 	}
-	
+
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
-	
+
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
 	}
@@ -69,32 +72,40 @@ public class Order {
 		return customerIdString;
 	}
 
-	public void setCustomerIdString(String customerIDString) {
-		this.customerIdString = customerIDString;
+	public void setCustomerIdString(String customerIdString) {
+		this.customerIdString = customerIdString;
 	}
 
 	public double getCost() {
 		return cost;
 	}
-	
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
-	
+
 	public double getTip() {
 		return tip;
 	}
-	
+
 	public void setTip(double tip) {
 		this.tip = tip;
 	}
-	
+
 	public boolean getFavorite() {
 		return setAsFavorite;
 	}
-	
-	public void setFavorite(boolean favorite) {
-		this.setAsFavorite = favorite;
+
+	public void setSetAsFavorite(boolean setAsFavorite) {
+		this.setAsFavorite = setAsFavorite;
+	}
+
+	public OrderStatus getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus() {
+		this.orderStatus = OrderStatus.COMPLETED;
 	}
 
 	@Override
@@ -102,14 +113,6 @@ public class Order {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((_id == null) ? 0 : _id.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(cost);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((customerIdString == null) ? 0 : customerIdString.hashCode());
-		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
-		result = prime * result + (setAsFavorite ? 1231 : 1237);
-		temp = Double.doubleToLongBits(tip);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -127,28 +130,13 @@ public class Order {
 				return false;
 		} else if (!_id.equals(other._id))
 			return false;
-		if (Double.doubleToLongBits(cost) != Double.doubleToLongBits(other.cost))
-			return false;
-		if (customerIdString == null) {
-			if (other.customerIdString != null)
-				return false;
-		} else if (!customerIdString.equals(other.customerIdString))
-			return false;
-		if (pizzas == null) {
-			if (other.pizzas != null)
-				return false;
-		} else if (!pizzas.equals(other.pizzas))
-			return false;
-		if (setAsFavorite != other.setAsFavorite)
-			return false;
-		if (Double.doubleToLongBits(tip) != Double.doubleToLongBits(other.tip))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [_id=" + _id + ", pizzas=" + pizzas + ", customerID=" + customerIdString + ", cost=" + cost + ", tip="
-				+ tip + ", setAsFavorite=" + setAsFavorite + "]";
+		return "Order [_id=" + _id + ", pizzas=" + pizzas + ", customerIdString=" + customerIdString + ", cost=" + cost
+				+ ", tip=" + tip + ", setAsFavorite=" + setAsFavorite + ", orderStatus=" + orderStatus + "]";
 	}
+
 }
