@@ -9,57 +9,17 @@
 .stack-trace { display: none;} 
 </style>
 <script type="text/javascript">
-<!--
-function flip(e) {
-  current = e.style.display;
-  if (current == 'block') {
-    e.style.display = 'none';
-    return 0;
-  }
-  else {
-    e.style.display = 'block';
-    return 1;
-  }
-}
-
-function toggleBox(szDivId, elem, msg1, msg2)
-{
-  var res = -1;  if (document.getElementById) {
-    res = flip(document.getElementById(szDivId));
-  }
-  else if (document.all) {
-    // this is the way old msie versions work
-    res = flip(document.all[szDivId]);
-  }
-  if(elem) {
-    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
-  }
-
-}
-
-function toggleAllBoxes() {
-  if (document.getElementsByTagName) {
-    d = document.getElementsByTagName('div');
-    for (i = 0; i < d.length; i++) {
-      if (d[i].className == 'log') {
-        flip(d[i]);
-      }
-    }
-  }
-}
-
-// -->
 </script>
 
 </head>
 <body>
 <h2 align='center'>Default test</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>2/0/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>15/0/0</td>
 </tr><tr>
-<td>Started on:</td><td>Mon Nov 16 15:43:18 CST 2020</td>
+<td>Started on:</td><td>Tue Nov 17 17:18:35 CST 2020</td>
 </tr>
-<tr><td>Total time:</td><td>1 seconds (1549 ms)</td>
+<tr><td>Total time:</td><td>4 seconds (4029 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -75,15 +35,80 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
+<td title='com.pizzeria.training.models.PizzaModelTest.allArgsConstructor()'><b>allArgsConstructor</b><br>Test class: com.pizzeria.training.models.PizzaModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.PizzaModelTest@389c4eb1</td></tr>
+<tr>
+<td title='com.pizzeria.training.controllers.PizzaControllerIntegrationTest.delete()'><b>delete</b><br>Test class: com.pizzeria.training.controllers.PizzaControllerIntegrationTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@6c61a903</td></tr>
+<tr>
+<td title='com.pizzeria.training.models.PizzaModelTest.equalsHashcode()'><b>equalsHashcode</b><br>Test class: com.pizzeria.training.models.PizzaModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.PizzaModelTest@389c4eb1</td></tr>
+<tr>
+<td title='com.pizzeria.training.models.OrderModelTest.f()'><b>f</b><br>Test class: com.pizzeria.training.models.OrderModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.OrderModelTest@658c5a19</td></tr>
+<tr>
+<td title='com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.findAll()'><b>findAll</b><br>Test class: com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@421e361</td></tr>
+<tr>
+<td title='com.pizzeria.training.services.PizzaServiceTest.findAll()'><b>findAll</b><br>Test class: com.pizzeria.training.services.PizzaServiceTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.services.PizzaServiceTest@59d4cd39</td></tr>
+<tr>
 <td title='com.pizzeria.training.controllers.PizzaControllerIntegrationTest.getAll()'><b>getAll</b><br>Test class: com.pizzeria.training.controllers.PizzaControllerIntegrationTest</td>
 <td></td>
 <td>0</td>
-<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5</td></tr>
+<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@6c61a903</td></tr>
 <tr>
 <td title='com.pizzeria.training.controllers.PizzaControllerIntegrationTest.getTest()'><b>getTest</b><br>Test class: com.pizzeria.training.controllers.PizzaControllerIntegrationTest</td>
 <td></td>
 <td>0</td>
-<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5</td></tr>
+<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@6c61a903</td></tr>
+<tr>
+<td title='com.pizzeria.training.controllers.PizzaControllerIntegrationTest.newPizza()'><b>newPizza</b><br>Test class: com.pizzeria.training.controllers.PizzaControllerIntegrationTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@6c61a903</td></tr>
+<tr>
+<td title='com.pizzeria.training.models.PizzaModelTest.noArgsConstructor()'><b>noArgsConstructor</b><br>Test class: com.pizzeria.training.models.PizzaModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.PizzaModelTest@389c4eb1</td></tr>
+<tr>
+<td title='com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.save()'><b>save</b><br>Test class: com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@421e361</td></tr>
+<tr>
+<td title='com.pizzeria.training.services.PizzaServiceTest.save()'><b>save</b><br>Test class: com.pizzeria.training.services.PizzaServiceTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.services.PizzaServiceTest@59d4cd39</td></tr>
+<tr>
+<td title='com.pizzeria.training.models.PizzaModelTest.setters()'><b>setters</b><br>Test class: com.pizzeria.training.models.PizzaModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.PizzaModelTest@389c4eb1</td></tr>
+<tr>
+<td title='com.pizzeria.training.models.PizzaModelTest.toStringTest()'><b>toStringTest</b><br>Test class: com.pizzeria.training.models.PizzaModelTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.models.PizzaModelTest@389c4eb1</td></tr>
+<tr>
+<td title='com.pizzeria.training.controllers.PizzaControllerIntegrationTest.update()'><b>update</b><br>Test class: com.pizzeria.training.controllers.PizzaControllerIntegrationTest</td>
+<td></td>
+<td>0</td>
+<td>com.pizzeria.training.controllers.PizzaControllerIntegrationTest@6c61a903</td></tr>
 </table><p>
 </body>
 </html>

@@ -14,24 +14,34 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class PizzaModelTestNGTest {
+public class PizzaModelTest {
 	
-	Pizza testPizza;
+	private Pizza testPizza;
 	
-	@BeforeClass
-	public static void beforeClass() {
-		//Code you would want to run before doing a single test, like resetting the database.
-	}
+	@BeforeClass	//Code you would want to run before doing a single test, like resetting the database.
+	public static void beforeClass() { /*...*/ }
 	
-	@BeforeMethod
-	public void resetPizza() {
-		System.out.println("Executing before @Test Method");
-		testPizza = null;
+	@BeforeMethod	//Code you would want to run before each method in this class
+	public void resetPizza() { testPizza = null; }
+	
+	@Test
+	public void allArgsConstructor() {
+		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON));
+		
+		
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
+		
+		assertEquals(testPizza.getClass(), Pizza.class);
+		assertEquals(testPizza.getType(), PizzaType.CLASSIC);
+		assertEquals(testPizza.getSize(), Size.SMALL);
+		assertEquals(testPizza.getHeight(), 5.0f, 0.0f);
+		assertEquals(testPizza.getCost(), 10.0d, 0.0d);
+		assertThat(testPizza.getToppings(), is(toppingList));	//Hamcrest library for collection evaluation
 	}
 	
 	@Test
 	public void noArgsConstructor() {
-		System.out.println("In @Test method: noArgsConstructor");
+		//System.out.println("In @Test method: noArgsConstructor");
 		testPizza = new Pizza();
 		
 		assertEquals(testPizza.getClass(), Pizza.class);
@@ -43,22 +53,8 @@ public class PizzaModelTestNGTest {
 	}
 	
 	@Test
-	public void allArgsConstructor() {
-		System.out.println("In @Test method: allArgsConstructor");
-		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
-		
-		assertEquals(testPizza.getClass(), Pizza.class);
-		assertEquals(testPizza.getType(), PizzaType.CLASSIC);
-		assertThat(testPizza.getToppings(), is(toppingList));	//Hamcrest library for collection evaluation
-		assertEquals(testPizza.getSize(), Size.SMALL);
-		assertEquals(testPizza.getHeight(), 5.0f, 0.0f);
-		assertEquals(testPizza.getCost(), 10.0d, 0.0d);
-	}
-	
-	@Test
 	public void setters() {
-		System.out.println("In @Test method: setters");
+		//System.out.println("In @Test method: setters");
 		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.ARTICHOKE, Toppings.BASIL));
 		testPizza = new Pizza();
 		
@@ -78,7 +74,7 @@ public class PizzaModelTestNGTest {
 	
 	@Test
 	public void toStringTest() {
-		System.out.println("In @Test method: toStringTest");
+		//System.out.println("In @Test method: toStringTest");
 		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.BROCCOLI, Toppings.CARROT));
 		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
 		
@@ -90,7 +86,7 @@ public class PizzaModelTestNGTest {
 	
 	@Test
 	public void equalsHashcode() {
-		System.out.println("In @Test method: equalsHashCode");
+		//System.out.println("In @Test method: equalsHashCode");
 		List<Toppings> toppingList = new ArrayList<Toppings>(Arrays.asList(Toppings.CHEESE, Toppings.GARLIC));
 		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);
 		Pizza otherPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingList, 10.0d, Size.SMALL);

@@ -1,21 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" ignored="0" total="7" passed="7">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1549" started-at="2020-11-16T21:43:18Z" finished-at="2020-11-16T21:43:20Z">
+  <suite name="Integration" duration-ms="4637" started-at="2020-11-17T23:30:58Z" finished-at="2020-11-17T23:31:03Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1549" started-at="2020-11-16T21:43:18Z" finished-at="2020-11-16T21:43:20Z">
-      <class name="com.pizzeria.training.controllers.PizzaControllerIntegrationTest">
-        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="9" started-at="2020-11-16T21:43:18Z" finished-at="2020-11-16T21:43:18Z">
+    <test name="RepoIntegration" duration-ms="2905" started-at="2020-11-17T23:30:58Z" finished-at="2020-11-17T23:31:01Z">
+      <class name="com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="9" started-at="2020-11-17T23:30:58Z" finished-at="2020-11-17T23:30:58Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestClass -->
-        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="1388" started-at="2020-11-16T21:43:18Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-11-16T21:43:19Z">
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="2552" started-at="2020-11-17T23:30:58Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-11-17T23:31:01Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextPrepareTestInstance -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2020-11-16T21:43:19Z" finished-at="2020-11-16T21:43:19Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.findAll()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="findAll()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="findAll" duration-ms="317" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- findAll -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.findAll()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.save()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="save()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="save" duration-ms="10" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- save -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest.save()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest@431cd9b2]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestClass -->
+      </class> <!-- com.pizzeria.training.repositories.PizzaRepositoryIntegrationTest -->
+    </test> <!-- RepoIntegration -->
+    <test name="ControllerIntegration" duration-ms="1724" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:03Z">
+      <class name="com.pizzeria.training.controllers.PizzaControllerIntegrationTest">
+        <test-method status="PASS" signature="springTestContextBeforeTestClass()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestClass" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:01Z" finished-at="2020-11-17T23:31:01Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestClass -->
+        <test-method status="PASS" signature="springTestContextPrepareTestInstance()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextPrepareTestInstance" is-config="true" duration-ms="1375" started-at="2020-11-17T23:31:01Z" depends-on-methods="org.springframework.test.context.testng.AbstractTestNGSpringContextTests.springTestContextBeforeTestClass" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextPrepareTestInstance -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="2" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.delete() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="mockSetup" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mockSetup -->
+        <test-method status="PASS" signature="delete()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="delete" duration-ms="151" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- delete -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.delete() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="mockSetup" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mockSetup -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <params>
             <param index="0">
               <value>
@@ -26,15 +128,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="mockSetup" is-config="true" duration-ms="10" started-at="2020-11-16T21:43:19Z" finished-at="2020-11-16T21:43:19Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mockSetup -->
-        <test-method status="PASS" signature="getAll()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="getAll" duration-ms="120" started-at="2020-11-16T21:43:19Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="getAll()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="getAll" duration-ms="95" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getAll -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <params>
             <param index="0">
               <value>
@@ -45,7 +143,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <params>
             <param index="0">
               <value>
@@ -56,15 +154,15 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextBeforeTestMethod -->
-        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="mockSetup" is-config="true" duration-ms="1" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- mockSetup -->
-        <test-method status="PASS" signature="getTest()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="getTest" duration-ms="4" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="getTest()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="getTest" duration-ms="11" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- getTest -->
-        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="mockSetup" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mockSetup -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <params>
             <param index="0">
               <value>
@@ -75,11 +173,71 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestMethod -->
-        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@769a1df5]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-11-16T21:43:20Z" finished-at="2020-11-16T21:43:20Z">
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.newPizza() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="mockSetup" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mockSetup -->
+        <test-method status="PASS" signature="newPizza()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="newPizza" duration-ms="64" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- newPizza -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.newPizza() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextBeforeTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextBeforeTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.update() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextBeforeTestMethod -->
+        <test-method status="PASS" signature="update()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="update" duration-ms="7" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- update -->
+        <test-method status="PASS" signature="mockSetup()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="mockSetup" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- mockSetup -->
+        <test-method status="PASS" signature="springTestContextAfterTestMethod(java.lang.reflect.Method)[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestMethod" is-config="true" duration-ms="0" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[void com.pizzeria.training.controllers.PizzaControllerIntegrationTest.update() throws java.lang.Exception]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- springTestContextAfterTestMethod -->
+        <test-method status="PASS" signature="springTestContextAfterTestClass()[pri:0, instance:com.pizzeria.training.controllers.PizzaControllerIntegrationTest@4bc222e]" name="springTestContextAfterTestClass" is-config="true" duration-ms="1" started-at="2020-11-17T23:31:03Z" finished-at="2020-11-17T23:31:03Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- springTestContextAfterTestClass -->
       </class> <!-- com.pizzeria.training.controllers.PizzaControllerIntegrationTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+    </test> <!-- ControllerIntegration -->
+  </suite> <!-- Integration -->
 </testng-results>

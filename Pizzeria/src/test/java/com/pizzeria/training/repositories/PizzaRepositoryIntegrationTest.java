@@ -44,8 +44,8 @@ public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextT
 		assertEquals(saveResult.getCost(), testPizza.getCost());
 		assertEquals(saveResult.getHeight(), testPizza.getHeight());
 		assertEquals(saveResult.getSize(), testPizza.getSize());
-		assertThat(saveResult.getToppings(), is(testPizza.getToppings()));
 		assertEquals(saveResult.getType(), testPizza.getType());
+		assertThat(saveResult.getToppings(), is(testPizza.getToppings()));
 	}
 	
 	@Test
