@@ -6,8 +6,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextT
 	PizzaRepository pizzaRepo;
 	
 	Pizza testPizza = new Pizza(5.0f, PizzaType.CLASSIC, 
-			new ArrayList<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.ARTICHOKE)),
+			new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.ARTICHOKE)),
 			10.0d, Size.SMALL);
 	
 	@Test

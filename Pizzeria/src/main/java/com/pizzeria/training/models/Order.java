@@ -26,9 +26,9 @@ public class Order {
 	
 	private List<Pizza> pizzas;
 	private String customerIdString;
-	private double cost;
-	private double tip;
-	private boolean setAsFavorite;	//Prevents from being added to the database
+	private Double cost;
+	private Double tip;
+	private Boolean setAsFavorite;	//Prevents from being added to the database
 	private OrderStatus orderStatus;
 	
 	public Order() {
