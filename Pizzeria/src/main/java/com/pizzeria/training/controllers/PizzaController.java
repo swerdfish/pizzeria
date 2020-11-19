@@ -50,12 +50,16 @@ public class PizzaController {
 	
 	// READ
 	
-	// Passing in pizza request body filters by field, just type one field, and it should find the respective pizza
 	@GetMapping
-	public List<Pizza> getAllPizza(@RequestParam(required = false) ObjectId _id, @RequestBody(required=false) Pizza pizza) {
+	public List<Pizza> getAllPizza(@RequestParam(required = false) ObjectId _id) {
 		if (_id != null) return Collections.singletonList(pizzaServ.findBy_id(_id));
-		if (pizza != null) return pizzaServ.getAllByExample(pizza);
 		return pizzaServ.findAll();
+	}
+	
+	// Passing in pizza request body filters by field, just type one field, and it should find the respective pizza
+	@PostMapping("/examples")
+	public List<Pizza> getAllPizzaByExample(@RequestBody Pizza pizza) {
+		return pizzaServ.getAllByExample(pizza);
 	}
 	
 	// UPDATE
