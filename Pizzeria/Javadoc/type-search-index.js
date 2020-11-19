@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.pizzeria.training.models","l":"Customer"},{"p":"com.pizzeria.training.models","l":"Customer.HomeAddress"},{"p":"com.pizzeria.training.models","l":"Customer.PaymentCard"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.pizzeria.training.models","l":"Order"}];updateSearchResults();

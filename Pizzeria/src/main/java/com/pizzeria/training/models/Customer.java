@@ -15,8 +15,11 @@ public class Customer {
 	/**
 	 * Home Address class.
 	 */
-	private static class HomeAddress {
+	//private static class HomeAddress {
 		/** line 1 of street address */
+	//private : made public for dummy data - change soon to private if we don't need it in the future
+	public static class HomeAddress {
+
 		private String streetAddress;
 		/** line 2 of street address */
 		private String streetAddressLine2;
@@ -184,7 +187,11 @@ public class Customer {
 	/**
 	 * Payment card class
 	 */
-	private static class PaymentCard {
+	//private static class PaymentCard {
+
+	//private : made public for dummy data : to be changed to private if we no longer need dummy data.
+	public static class PaymentCard {
+
 		// TODO Implement hashing or some other kind of security for this information 
 		/** card number*/
 		private long cardNumber;
