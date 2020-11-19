@@ -51,7 +51,8 @@ public class PizzaControllerIntegrationTest extends AbstractTestNGSpringContextT
 	@Autowired
 	ObjectMapper objMap;
 	
-	@MockBean private PizzaService pizzaServ;
+	@MockBean
+	private PizzaService pizzaServ;
 	
 	private Pizza testPizza;
 	
