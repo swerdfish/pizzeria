@@ -1,6 +1,7 @@
 package com.pizzeria.training.models;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -11,15 +12,15 @@ public class Pizza {
 	@Id
 	public ObjectId _id;
 	
-	private float height;
+	private Float height;
 	private PizzaType type;
-	private List<Toppings> toppings;
-	private double cost;
+	private Set<Toppings> toppings;
+	private Double cost;
 	private Size size;
 	
 	public Pizza() {}
 	
-	public Pizza(float height, PizzaType type, List<Toppings> toppings, double cost, Size size) {
+	public Pizza(float height, PizzaType type, Set<Toppings> toppings, double cost, Size size) {
 		super();
 		this.height = height;
 		this.type = type;
@@ -48,10 +49,10 @@ public class Pizza {
 	public void setType(PizzaType type) {
 		this.type = type;
 	}
-	public List<Toppings> getToppings() {
+	public Set<Toppings> getToppings() {
 		return toppings;
 	}
-	public void setToppings(List<Toppings> toppings) {
+	public void setToppings(Set<Toppings> toppings) {
 		this.toppings = toppings;
 	}
 	public double getCost() {
