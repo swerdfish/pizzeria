@@ -31,7 +31,7 @@ public class OrderModelTest {
 		assertNull(testOrder.getFavorite());
 		assertEquals(testOrder.getOrderStatus(), OrderStatus.IN_PROGRESS);
 		assertNull(testOrder.getTip());
-		assertTrue(testOrder.getPizzas().isEmpty());
+		assertNull(testOrder.getPizzas());
 	}
 	
 	@Test
