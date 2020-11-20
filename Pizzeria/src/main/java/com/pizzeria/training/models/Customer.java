@@ -126,25 +126,25 @@ public class Customer {
 	//private : made public for dummy data : to be changed to private if we no longer need dummy data.
 	public static class PaymentCard {
 		// TODO Implement hashing or some other kind of security for this information 
-		private long cardNumber;
+		private Long cardNumber;
 		private String expiration;
-		private short securityCode;
+		private Short securityCode;
 		
 		public PaymentCard() {
 		}
 		
-		public PaymentCard(long cardNumber, String expiration, short securityCode) {
+		public PaymentCard(Long cardNumber, String expiration, Short securityCode) {
 			super();
 			this.cardNumber = cardNumber;
 			this.expiration = expiration;
 			this.securityCode = securityCode;
 		}
 
-		public long getCardNumber() {
+		public Long getCardNumber() {
 			return cardNumber;
 		}
 
-		public void setCardNumber(long cardNumber) {
+		public void setCardNumber(Long cardNumber) {
 			this.cardNumber = cardNumber;
 		}
 
@@ -156,11 +156,11 @@ public class Customer {
 			this.expiration = expiration;
 		}
 
-		public short getSecurityCode() {
+		public Short getSecurityCode() {
 			return securityCode;
 		}
 
-		public void setSecurityCode(short securityCode) {
+		public void setSecurityCode(Short securityCode) {
 			this.securityCode = securityCode;
 		}
 
@@ -168,9 +168,9 @@ public class Customer {
 		public int hashCode() {
 			final int prime = 31;
 			int result = 1;
-			result = prime * result + (int) (cardNumber ^ (cardNumber >>> 32));
+			result = prime * result + ((cardNumber == null) ? 0 : cardNumber.hashCode());
 			result = prime * result + ((expiration == null) ? 0 : expiration.hashCode());
-			result = prime * result + securityCode;
+			result = prime * result + ((securityCode == null) ? 0 : securityCode.hashCode());
 			return result;
 		}
 
@@ -183,14 +183,20 @@ public class Customer {
 			if (getClass() != obj.getClass())
 				return false;
 			PaymentCard other = (PaymentCard) obj;
-			if (cardNumber != other.cardNumber)
+			if (cardNumber == null) {
+				if (other.cardNumber != null)
+					return false;
+			} else if (!cardNumber.equals(other.cardNumber))
 				return false;
 			if (expiration == null) {
 				if (other.expiration != null)
 					return false;
 			} else if (!expiration.equals(other.expiration))
 				return false;
-			if (securityCode != other.securityCode)
+			if (securityCode == null) {
+				if (other.securityCode != null)
+					return false;
+			} else if (!securityCode.equals(other.securityCode))
 				return false;
 			return true;
 		}
@@ -213,6 +219,14 @@ public class Customer {
 	
 	public Customer() {}
 
+	public Customer(Long phoneNum, String email, HomeAddress address, PaymentCard card) {
+		super();
+		this.phoneNum = phoneNum;
+		this.email = email;
+		this.address = address;
+		this.card = card;
+	}
+	
 	public List<Pizza> getFavoriteOrder() {
 		return favoriteOrder;
 	}
@@ -229,10 +243,10 @@ public class Customer {
 		this._id = _id;
 	}
 
-	public long getPhoneNum() {
+	public Long getPhoneNum() {
 		return phoneNum;
 	}
-	public void setPhoneNum(long phoneNum) {
+	public void setPhoneNum(Long phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 	
@@ -257,13 +271,6 @@ public class Customer {
 		this.card = card;
 	}
 	
-	public Customer(long phoneNum, String email, HomeAddress address, PaymentCard card) {
-		super();
-		this.phoneNum = phoneNum;
-		this.email = email;
-		this.address = address;
-		this.card = card;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

@@ -76,27 +76,27 @@ public class Order {
 		this.customerIdString = customerIdString;
 	}
 
-	public double getCost() {
+	public Double getCost() {
 		return cost;
 	}
 
-	public void setCost(double cost) {
+	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
-	public double getTip() {
+	public Double getTip() {
 		return tip;
 	}
 
-	public void setTip(double tip) {
+	public void setTip(Double tip) {
 		this.tip = tip;
 	}
 
-	public boolean getFavorite() {
+	public Boolean getFavorite() {
 		return setAsFavorite;
 	}
 
-	public void setSetAsFavorite(boolean setAsFavorite) {
+	public void setSetAsFavorite(Boolean setAsFavorite) {
 		this.setAsFavorite = setAsFavorite;
 	}
 
