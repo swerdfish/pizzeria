@@ -122,7 +122,7 @@ public class Customer {
 		}
 		/**
 		 * toString override method
-		 * @return address information as a formatted string
+		 * 
 		 */
 		@Override
 		public String toString() {
@@ -145,7 +145,7 @@ public class Customer {
 		}
 		/**
 		 * equals override method
-		 * @return Boolean value of whether the two compared objects are equal
+		 * 
 		 */
 		@Override
 		public boolean equals(Object obj) {
@@ -272,7 +272,6 @@ public class Customer {
 		}
 		/**
 		 * equals override method
-		 * @return Boolean value of whether the two compared objects are equal
 		 */
 		@Override
 		public boolean equals(Object obj) {
@@ -296,7 +295,7 @@ public class Customer {
 		}
 		/**
 		 * toString override method
-		 * @return card information as a formatted string
+		 *
 		 */
 		@Override
 		public String toString() {
@@ -435,7 +434,7 @@ public class Customer {
 	}
 	/**
 	 * equals override method
-	 * @return Boolean value of whether the two compared objects are equal
+	 * 
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -467,7 +466,7 @@ public class Customer {
 	}
 	/**
 	 * toString override method
-	 * @return customer information as a formatted string
+	 * 
 	 */
 	@Override
 	public String toString() {

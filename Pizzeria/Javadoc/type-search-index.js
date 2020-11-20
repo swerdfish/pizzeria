@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.pizzeria.training.models","l":"Order"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"com.pizzeria.training.repository","l":"OrdersRepository"}];updateSearchResults();

@@ -169,7 +169,7 @@ public class Order {
 		this.orderStatus = OrderStatus.COMPLETED;
 	}
 	/**
-	 * hashCode override
+	 * hashCode override method
 	 */
 	@Override
 	public int hashCode() {
@@ -180,7 +180,7 @@ public class Order {
 	}
 	/**
 	 * equals override method
-	 * @return Boolean value of whether the two compared objects are equal
+	 * 
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -200,7 +200,7 @@ public class Order {
 	}
 	/**
 	 * toString override method
-	 * @return String representation of the order
+	 *
 	 */
 	@Override
 	public String toString() {

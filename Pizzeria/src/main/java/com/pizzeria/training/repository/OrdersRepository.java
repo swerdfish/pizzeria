@@ -5,10 +5,16 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import com.pizzeria.training.models.Order;
-
+/**
+ * Spring Data Repository interface
+ */
 @Repository
 public interface OrdersRepository extends MongoRepository<Order, ObjectId> {
-
+	/**
+	 * Returns an order with the provided Id
+	 * @param id The Id used to search
+	 * @return The order with the given Id
+	 */
 	Order findBy_id(ObjectId id);
 	
 
