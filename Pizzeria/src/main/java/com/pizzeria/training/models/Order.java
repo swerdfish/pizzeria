@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -21,43 +21,49 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document(collection ="orders")
 public class Order {
-	@Id
-	public ObjectId _id;
+	@Id private ObjectId _id;
+	@DBRef private Customer customer;
+	@DBRef private ObjectId pizzeriaId;
 	
 	private List<Pizza> pizzas;
-	private String customerIdString;
 	private Double cost;
 	private Double tip;
-	private Boolean setAsFavorite;	//Prevents from being added to the database
-	private OrderStatus orderStatus;
+	private OrderStatus status;
+	private OrderType type;
+	private Address deliveryAddress;
 	
 	public Order() {
 		super();
-		this.orderStatus = OrderStatus.IN_PROGRESS;
+		this.status = OrderStatus.PENDING;
 	}
 	
-	@PersistenceConstructor
-	public Order(List<Pizza> pizzas, String customerIdString, Double cost, Double tip, Boolean setAsFavorite) {
+	public Order(Customer customer, ObjectId pizzeriaId, List<Pizza> pizzas, Double cost, Double tip, OrderType type, Address deliveryAddress) {
 		this();
+		this.customer = customer;
+		this.pizzeriaId = pizzeriaId;
 		this.pizzas = pizzas;
-		this.customerIdString = customerIdString;
 		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
 		this.tip = (tip != null ? tip : 0.0D);
-		this.setAsFavorite = (setAsFavorite != null ? setAsFavorite : false);
-		this.orderStatus = OrderStatus.IN_PROGRESS;
+		this.status = OrderStatus.PENDING;
+		this.type = type;
+		this.deliveryAddress = deliveryAddress;
 		
 	}
-	
-	public Order(List<Pizza> pizzas, ObjectId customerId, Double cost, Double tip, Boolean setAsFavorite) {
-		this(pizzas, customerId.toHexString(), cost, tip, setAsFavorite);
-	}
-	
+
 	public ObjectId get_id() {
 		return _id;
 	}
-	
+
 	public void set_id(ObjectId _id) {
 		this._id = _id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public List<Pizza> getPizzas() {
@@ -66,14 +72,6 @@ public class Order {
 
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
-	}
-
-	public String getCustomerIdString() {
-		return customerIdString;
-	}
-
-	public void setCustomerIdString(String customerIdString) {
-		this.customerIdString = customerIdString;
 	}
 
 	public Double getCost() {
@@ -92,20 +90,37 @@ public class Order {
 		this.tip = tip;
 	}
 
-	public Boolean getFavorite() {
-		return setAsFavorite;
+	public OrderStatus getStatus() {
+		return status;
+	}
+	
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}	
+
+
+	public OrderType getType() {
+		return type;
 	}
 
-	public void setSetAsFavorite(Boolean setAsFavorite) {
-		this.setAsFavorite = setAsFavorite;
+	public void setType(OrderType type) {
+		this.type = type;
 	}
 
-	public OrderStatus getOrderStatus() {
-		return orderStatus;
+	public ObjectId getPizzeriaId() {
+		return pizzeriaId;
 	}
 
-	public void setOrderStatus() {
-		this.orderStatus = OrderStatus.COMPLETED;
+	public void setPizzeriaId(ObjectId pizzeriaId) {
+		this.pizzeriaId = pizzeriaId;
+	}
+
+	public Address getDeliveryAddress() {
+		return deliveryAddress;
+	}
+
+	public void setDeliveryAddress(Address deliveryAddress) {
+		this.deliveryAddress = deliveryAddress;
 	}
 
 	@Override
@@ -113,6 +128,14 @@ public class Order {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((_id == null) ? 0 : _id.hashCode());
+		result = prime * result + ((cost == null) ? 0 : cost.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((deliveryAddress == null) ? 0 : deliveryAddress.hashCode());
+		result = prime * result + ((pizzas == null) ? 0 : pizzas.hashCode());
+		result = prime * result + ((pizzeriaId == null) ? 0 : pizzeriaId.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((tip == null) ? 0 : tip.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -130,13 +153,87 @@ public class Order {
 				return false;
 		} else if (!_id.equals(other._id))
 			return false;
+		if (cost == null) {
+			if (other.cost != null)
+				return false;
+		} else if (!cost.equals(other.cost))
+			return false;
+		if (customer == null) {
+			if (other.customer != null)
+				return false;
+		} else if (!customer.equals(other.customer))
+			return false;
+		if (deliveryAddress == null) {
+			if (other.deliveryAddress != null)
+				return false;
+		} else if (!deliveryAddress.equals(other.deliveryAddress))
+			return false;
+		if (pizzas == null) {
+			if (other.pizzas != null)
+				return false;
+		} else if (!pizzas.equals(other.pizzas))
+			return false;
+		if (pizzeriaId == null) {
+			if (other.pizzeriaId != null)
+				return false;
+		} else if (!pizzeriaId.equals(other.pizzeriaId))
+			return false;
+		if (status != other.status)
+			return false;
+		if (tip == null) {
+			if (other.tip != null)
+				return false;
+		} else if (!tip.equals(other.tip))
+			return false;
+		if (type != other.type)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Order [_id=" + _id + ", pizzas=" + pizzas + ", customerIdString=" + customerIdString + ", cost=" + cost
-				+ ", tip=" + tip + ", setAsFavorite=" + setAsFavorite + ", orderStatus=" + orderStatus + "]";
+		return "Order [_id=" + _id + ", customer=" + customer + ", pizzeriaId=" + pizzeriaId + ", pizzas=" + pizzas
+				+ ", cost=" + cost + ", tip=" + tip + ", status=" + status + ", type=" + type + ", deliveryAddress="
+				+ deliveryAddress + "]";
 	}
 
 }
+/*
+
+	 {
+		"customer":{
+			"_id":"5fbc3c9d600ae701ef07d947"
+		},
+		"pizzeriaId":null,
+		"pizzas":[
+			{
+				"type": "CLASSIC",
+				"toppings": [
+				"PEPPERONI", "SAUSAGE"
+				],
+				"cost": 10.0,
+				"size": "LARGE"
+			},
+			{
+				"type": "DEEP_DISH",
+				"toppings": [
+					"SPINACH", "CHEESE"
+				],
+				"cost": 20.0,
+				"size": "SMALL"
+			}
+		],
+		"cost":30.0,
+		"tip":5.0,
+		"status":"COOKING",
+		"type":"PICKUP",
+		"deliveryAddress":{
+			"streetAddress":"1 delivery",
+			"streetAddressLine2":"2 delivery",
+			"city":"city",
+			"state":"state",
+			"postal":"postal"
+		}
+	}
+
+ */

@@ -40,12 +40,12 @@ public class PizzaModelTest {
 	@Test
 	public void allArgsConstructor() {
 		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, PizzaSize.SMALL);
 		
 		assertEquals(testPizza.getClass(), Pizza.class);
 		assertEquals(testPizza.getType(), PizzaType.CLASSIC);
 		assertThat(testPizza.getToppings(), is(toppingSet));	//Hamcrest library for collection evaluation
-		assertEquals(testPizza.getSize(), Size.SMALL);
+		assertEquals(testPizza.getSize(), PizzaSize.SMALL);
 		assertEquals(testPizza.getHeight(), 5.0f, 0.0f);
 		assertEquals(testPizza.getCost(), 10.0d, 0.0d);
 	}
@@ -58,14 +58,14 @@ public class PizzaModelTest {
 		
 		testPizza.setCost(5.0d);
 		testPizza.setHeight(10.0f);
-		testPizza.setSize(Size.MEDIUM);
+		testPizza.setSize(PizzaSize.MEDIUM);
 		testPizza.setToppings(toppingSet);
 		testPizza.setType(PizzaType.DEEP_DISH);
 		
 		assertEquals(testPizza.getClass(), Pizza.class);
 		assertEquals(testPizza.getType(), PizzaType.DEEP_DISH);
 		assertThat(testPizza.getToppings(), is(toppingSet));	//Hamcrest library for collection evaluation
-		assertEquals(testPizza.getSize(), Size.MEDIUM);
+		assertEquals(testPizza.getSize(), PizzaSize.MEDIUM);
 		assertEquals(testPizza.getHeight(), 10.0f, 0.0f);
 		assertEquals(testPizza.getCost(), 5.0d, 0.0d);
 	}
@@ -74,10 +74,10 @@ public class PizzaModelTest {
 	public void toStringTest() {
 		System.out.println("In @Test method: toStringTest");
 		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.BROCCOLI, Toppings.CARROT));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, PizzaSize.SMALL);
 		
 		String expected = "Pizza [height=" + 5.0f + ", type=" + PizzaType.CLASSIC + ", toppings=" + toppingSet + 
-				", cost=" + 10.0d + ", size=" + Size.SMALL + "]";
+				", cost=" + 10.0d + ", size=" + PizzaSize.SMALL + "]";
 		
 		assertEquals(testPizza.toString(), expected);
 	}
@@ -86,8 +86,8 @@ public class PizzaModelTest {
 	public void equalsHashcode() {
 		System.out.println("In @Test method: equalsHashCode");
 		Set<Toppings> toppingSet = new HashSet<Toppings>(Arrays.asList(Toppings.CHEESE, Toppings.GARLIC));
-		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
-		Pizza otherPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, Size.SMALL);
+		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, PizzaSize.SMALL);
+		Pizza otherPizza = new Pizza(5.0f, PizzaType.CLASSIC, toppingSet, 10.0d, PizzaSize.SMALL);
 		
 		assertEquals(testPizza, otherPizza);
 		

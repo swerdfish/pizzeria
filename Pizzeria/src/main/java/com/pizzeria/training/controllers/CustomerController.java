@@ -88,24 +88,45 @@ public class CustomerController {
 		}
 		
 		return outputSb.toString().trim();
-	}
-		
-//Sample input postman
-//		{
-//		    "phoneNum": 123141,
-//		    "address": {
-//				"streetAddress":"123 West st",
-//				"streetAddress2":"",
-//				"city":"Chicago",
-//				"state":"IL",
-//				"postal":"60111"
-//			},
-//		    "email":"sample@mail.com",
-//		    "creditCard": {
-//				"cardNumber":1234123412341234,
-//				"expiration":"05/25",
-//				"securityCode":123
-//			}
-//		}
-		
+	}	
 }
+/*
+
+{
+	"email":"mail@mail.com",
+	"password":"password",
+	"firstName":"first",
+	"lastName":"last",
+	"phoneNum":1231231234,
+	"homeAddress": {
+		"streetAddress":"1 home",
+		"streetAddressLine2":"2 home",
+		"city":"city",
+		"state":"state",
+		"postal":"postal"
+	},
+	"card": {
+		"cardNumber":1234123412341234,
+		"expiration":"MM/YY",
+		"securityCode":123,
+		"billingAddress": {
+			"streetAddress":"1 billing",
+			"streetAddressLine2":"2 billing",
+			"city":"city",
+			"state":"state",
+			"postal":"postal"
+		}
+	},
+	"favoriteOrder": [
+		{
+			"type": "CLASSIC",
+			"toppings": [
+				"PEPPERONI", "SAUSAGE"
+			],
+			"cost": 10.0,
+			"size": "LARGE"
+		}
+	]
+}
+
+ */

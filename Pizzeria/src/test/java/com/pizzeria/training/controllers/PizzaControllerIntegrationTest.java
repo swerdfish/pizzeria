@@ -38,7 +38,7 @@ import org.testng.annotations.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.models.PizzaType;
-import com.pizzeria.training.models.Size;
+import com.pizzeria.training.models.PizzaSize;
 import com.pizzeria.training.models.Toppings;
 import com.pizzeria.training.service.PizzaService;
 
@@ -59,7 +59,7 @@ public class PizzaControllerIntegrationTest extends AbstractTestNGSpringContextT
 	private void mockSetup() {
 		testPizza = new Pizza(5.0f, PizzaType.CLASSIC, 
 							new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.BACON)), 
-							10.0d, Size.SMALL);
+							10.0d, PizzaSize.SMALL);
 	}
 	
 	@Test

@@ -11,17 +11,13 @@ import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.models.PizzaType;
-import com.pizzeria.training.models.Size;
+import com.pizzeria.training.models.PizzaSize;
 import com.pizzeria.training.models.Toppings;
 import com.pizzeria.training.repository.CustomerRepository;
 import com.pizzeria.training.repository.OrdersRepository;
-import com.pizzeria.training.repository.PizzaRepository;
 
 @SpringBootApplication
 public class PizzeriaApplication implements CommandLineRunner{
-	
-	@Autowired
-	private PizzaRepository pizzaRepository;
 	
 	@Autowired
 	private CustomerRepository customerRepository;
@@ -39,11 +35,6 @@ public class PizzeriaApplication implements CommandLineRunner{
 //		Pizza p3 = new Pizza(15f,PizzaType.SICILIAN,Arrays.asList(Toppings.BROCCOLI,Toppings.PINEAPPLE),10.0, Size.MEDIUM);
 //		Pizza p4 = new Pizza(16f,PizzaType.STUFFED,Arrays.asList(Toppings.TOMATO,Toppings.CHEESE,Toppings.CHICKEN),11.0, Size.LARGE);
 //		Pizza p5 = new Pizza(20f,PizzaType.CLASSIC,Arrays.asList(Toppings.BACON),9.0, Size.XLARGE);
-//		pizzaRepository.save(p1);
-//		pizzaRepository.save(p2);
-//		pizzaRepository.save(p3);
-//		pizzaRepository.save(p4);
-//		pizzaRepository.save(p5);
 //		
 //		Customer c1 = new Customer(909877812, "Jeff@pizza.com", new Customer.HomeAddress("123 West st", " ", "Arlington", "Texas", "4063"), new Customer.PaymentCard(1234445, "11/22", (short)182) );
 //		Customer c2 = new Customer(412312422, "Bezo@pizza.com", new Customer.HomeAddress("143 East st", "22 Santa Anna ", "San Francisco", "California", "9484"), new Customer.PaymentCard(1241242, "02/25", (short)231) );

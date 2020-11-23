@@ -17,7 +17,7 @@ import org.testng.annotations.Test;
 
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.models.PizzaType;
-import com.pizzeria.training.models.Size;
+import com.pizzeria.training.models.PizzaSize;
 import com.pizzeria.training.models.Toppings;
 import com.pizzeria.training.repository.PizzaRepository;
 
@@ -34,7 +34,7 @@ public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextT
 	
 	Pizza testPizza = new Pizza(5.0f, PizzaType.CLASSIC, 
 			new HashSet<Toppings>(Arrays.asList(Toppings.ANCHOVY, Toppings.ARTICHOKE)),
-			10.0d, Size.SMALL);
+			10.0d, PizzaSize.SMALL);
 	
 	@Test
 	public void save() {
@@ -48,7 +48,7 @@ public class PizzaRepositoryIntegrationTest extends AbstractTestNGSpringContextT
 		assertThat(saveResult.getToppings(), is(testPizza.getToppings()));
 	}
 	
-	@Test
+	@Test(dependsOnMethods = {"save"} )
 	public void findAll() {
 		pizzaRepo.save(testPizza);
 		List<Pizza> findAllResult = pizzaRepo.findAll();

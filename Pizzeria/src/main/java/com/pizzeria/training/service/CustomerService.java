@@ -26,16 +26,26 @@ public class CustomerService {
 		this.custRepo = custRepo;
 	}
 	
-	public List<Customer> findAll(){
-		return custRepo.findAll();
-	}
-	
 	public Customer save(Customer newCustomer) {
 		return custRepo.save(newCustomer);
 	}
+
+	public List<Customer> findAll(){
+		return custRepo.findAll();
+	}
+
+	public List<Customer> findAllByExample(Customer customer) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Customer> example = Example.of(customer, matcher);
+		return custRepo.findAll(example);
+	}
 	
-	public void delete(Customer customer) {
-		custRepo.delete(customer);
+	public List<Customer> getAllByCity(String city) {
+		return custRepo.findByHomeAddressCity(city);
+	}
+	
+	public Customer getCustomerBy_id(ObjectId _id) {
+		return custRepo.findBy_id(_id);
 	}
 	
 	public List<Pizza> updateFavoriteOrder(ObjectId customerId, List<Pizza> newFavorite) throws Exception{
@@ -54,18 +64,8 @@ public class CustomerService {
 			throw new Exception("Target customer's favorite order did not properly update.");
 		}
 	}
-
-	public List<Customer> getAllByCity(String city) {
-		return custRepo.findByAddressCity(city);
-	}
 	
-	public Customer getCustomerBy_id(ObjectId _id) {
-		return custRepo.findBy_id(_id);
-	}
-
-	public List<Customer> findAllByExample(Customer customer) {
-		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
-		Example<Customer> example = Example.of(customer, matcher);
-		return custRepo.findAll(example);
+	public void delete(Customer customer) {
+		custRepo.delete(customer);
 	}
 }

@@ -35,37 +35,26 @@ public class OrderService {
 		this.mongoTemplate = mongoTemplate;
 	}
 	
+	public Order save(Order newOrder) {
+		return orderRepo.save(newOrder);
+	}
+
 	public List<Order> findAll(){
 		return orderRepo.findAll();
 	}
 	
-	public Order save(Order newOrder) {
-		if (newOrder.getFavorite()) {
-			if (newOrder.getCustomerIdString() != null) {
-				try {
-					custServ.updateFavoriteOrder(new ObjectId(newOrder.getCustomerIdString()), newOrder.getPizzas());
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			} else {
-				System.out.println("Customer info not included. Customer favorite not updated.");
-			}
-		}
-		return orderRepo.save(newOrder);
+	public Order getOrderBy_id(ObjectId _id) {
+		return orderRepo.findBy_id(_id);
 	}
 	
-	public ResponseEntity<String> updateStatus(ObjectId orderId) {
-		try {
-			Order order = orderRepo.findBy_id(orderId);
-			if (order == null) {
-				return new ResponseEntity<>("Invalid Order Id!", HttpStatus.BAD_REQUEST);
-			}
-			order.setOrderStatus();
-			orderRepo.save(order);			
-		} catch (Exception e) {
-			return new ResponseEntity<>("Something went wrong!", HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<>("Successfully updated the order status!", HttpStatus.OK);
+	public List<Order> getOrdersByCust_Id(ObjectId cust_id){
+		return orderRepo.findByCustomer_id(cust_id);
+	}
+
+	public List<Order> getAllByExample(Order order) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Order> example = Example.of(order, matcher);
+		return orderRepo.findAll(example);
 	}
 	
 	public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
@@ -76,17 +65,8 @@ public class OrderService {
 		return filteredOrders;
 	}
 
-	public Order getOrderBy_id(ObjectId _id) {
-		return orderRepo.findBy_id(_id);
-	}
-	
 	public void delete(Order orderToDelete) {
 		orderRepo.delete(orderToDelete);
 	}
 
-	public List<Order> getAllByExample(Order order) {
-		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
-		Example<Order> example = Example.of(order, matcher);
-		return orderRepo.findAll(example);
-	}
 }
