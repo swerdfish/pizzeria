@@ -9,8 +9,6 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Order;
@@ -21,17 +19,15 @@ import com.pizzeria.training.repository.OrdersRepository;
 public class OrderService {
 
 	private OrdersRepository orderRepo;
-	private CustomerService custServ;
 	private MongoTemplate mongoTemplate;
 	
 	public OrderService() {
 	}
 	
 	@Autowired
-	public OrderService(OrdersRepository orderRepo, CustomerService custServ, MongoTemplate mongoTemplate) {
+	public OrderService(OrdersRepository orderRepo, MongoTemplate mongoTemplate) {
 		super();
 		this.orderRepo = orderRepo;
-		this.custServ = custServ;
 		this.mongoTemplate = mongoTemplate;
 	}
 	
@@ -46,10 +42,6 @@ public class OrderService {
 	public Order getOrderBy_id(ObjectId _id) {
 		return orderRepo.findBy_id(_id);
 	}
-	
-	public List<Order> getOrdersByCust_Id(ObjectId cust_id){
-		return orderRepo.findByCustomer_id(cust_id);
-	}
 
 	public List<Order> getAllByExample(Order order) {
 		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
@@ -63,6 +55,10 @@ public class OrderService {
 		List<Order> filteredOrders = mongoTemplate.find(query, Order.class);
 		
 		return filteredOrders;
+	}
+	
+	public List<Order> getOrdersByCustomerId(ObjectId cust_id){
+		return orderRepo.findByCustomer_id(cust_id);
 	}
 
 	public void delete(Order orderToDelete) {

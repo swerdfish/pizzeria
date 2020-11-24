@@ -74,7 +74,7 @@ public class OrderController {
 	@GetMapping(path="/?cust_id={cust_id}")
 	public ResponseEntity<List<Order>> getCustomerByOrderId(@RequestParam ObjectId cust_id){
 		if (cust_id==null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-		return new ResponseEntity<>(orderServ.getOrdersByCust_Id(cust_id), HttpStatus.OK);
+		return new ResponseEntity<>(orderServ.getOrdersByCustomerId(cust_id), HttpStatus.OK);
 	}
 	
 	@PostMapping("/examples")

@@ -1,6 +1,7 @@
 package com.pizzeria.training.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Customer;
+import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.repository.CustomerRepository;
 
@@ -16,14 +18,16 @@ import com.pizzeria.training.repository.CustomerRepository;
 public class CustomerService {
 
 	private CustomerRepository custRepo;
+	private OrderService orderServ;
 	
 	public CustomerService() {
 	}
 
 	@Autowired
-	public CustomerService(CustomerRepository custRepo) {
+	public CustomerService(CustomerRepository custRepo, OrderService orderServ) {
 		super();
 		this.custRepo = custRepo;
+		this.orderServ = orderServ;
 	}
 	
 	public Customer save(Customer newCustomer) {
@@ -34,6 +38,10 @@ public class CustomerService {
 		return custRepo.findAll();
 	}
 
+	public Customer getCustomerBy_id(ObjectId _id) {
+		return custRepo.findBy_id(_id);
+	}
+	
 	public List<Customer> findAllByExample(Customer customer) {
 		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
 		Example<Customer> example = Example.of(customer, matcher);
@@ -42,10 +50,6 @@ public class CustomerService {
 	
 	public List<Customer> getAllByCity(String city) {
 		return custRepo.findByHomeAddressCity(city);
-	}
-	
-	public Customer getCustomerBy_id(ObjectId _id) {
-		return custRepo.findBy_id(_id);
 	}
 	
 	public List<Pizza> updateFavoriteOrder(ObjectId customerId, List<Pizza> newFavorite) throws Exception{
