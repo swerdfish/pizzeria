@@ -3,23 +3,28 @@ package com.pizzeria.training.models;
 import static org.junit.Assert.assertNull;
 import static org.testng.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.bson.types.ObjectId;
+import org.mockito.Mockito;
 import org.testng.annotations.Test;
 
 public class CustomerModelTest {
   private Customer testCust;
   
-  Long testPhone = 1L;
   String testMail = "test email";
+  String testPassword = "test password";
+  String testFirst = "test first";
+  String testLast = "test last";
+  String testPhone = "test phone";
   
-  String testStreet = "street";
-  String testStreet2 = "street2";
-  String testCity = "city";
-  String testState = "state";
-  String testPostal = "postal";
+  Address testAddress = Mockito.mock(Address.class);
   
-  Long testNumber = 1L;
+  Long testCardNumber = 1L;
   String testExpiration = "expiration";
   Short testSecurity = 1;
+  Customer.PaymentCard testCard;
   
   @Test
   public void noArgsConstructor() {
@@ -27,51 +32,11 @@ public class CustomerModelTest {
 	  
 	  assertEquals(testCust.getClass(), Customer.class);
 	  assertNull(testCust.get_id());
-	  assertNull(testCust.getAddress());
+	  assertNull(testCust.getHomeAddress());
 	  assertNull(testCust.getCard());
 	  assertNull(testCust.getEmail());
 	  assertNull(testCust.getFavoriteOrder());
 	  assertNull(testCust.getPhoneNum());
-  }
-  
-  @Test
-  public void addressNoArgs() {
-	  Customer.HomeAddress testAddress = new Customer.HomeAddress();
-	  
-	  assertEquals(testAddress.getClass(), Customer.HomeAddress.class);
-	  assertNull(testAddress.getStreetAddress());
-	  assertNull(testAddress.getCity());
-	  assertNull(testAddress.getState());
-	  assertNull(testAddress.getPostal());
-  }
-  
-  @Test
-  public void addressAllArgs() {
-	  Customer.HomeAddress testAddress = new Customer.HomeAddress(testStreet, testStreet2, testCity, testState, testPostal);
-	  
-	  assertEquals(testAddress.getClass(), Customer.HomeAddress.class);
-	  assertEquals(testAddress.getStreetAddress(), testStreet);
-	  assertEquals(testAddress.getStreetAddressLine2(), testStreet2);
-	  assertEquals(testAddress.getCity(), testCity);
-	  assertEquals(testAddress.getState(), testState);
-	  assertEquals(testAddress.getPostal(), testPostal);
-  }
-  
-  @Test
-  public void addessSetters() {
-	  Customer.HomeAddress testAddress = new Customer.HomeAddress();
-	  
-	  testAddress.setStreetAddress(testStreet);
-	  testAddress.setStreetAddressLine2(testStreet2);
-	  testAddress.setCity(testCity);
-	  testAddress.setState(testState);
-	  testAddress.setPostal(testPostal);
-	  
-	  assertEquals(testAddress.getStreetAddress(), testStreet);
-	  assertEquals(testAddress.getStreetAddressLine2(), testStreet2);
-	  assertEquals(testAddress.getCity(), testCity);
-	  assertEquals(testAddress.getState(), testState);
-	  assertEquals(testAddress.getPostal(), testPostal);
   }
   
   @Test
@@ -86,39 +51,41 @@ public class CustomerModelTest {
   
   @Test
   public void cardAllArgs() {
-	  Customer.PaymentCard testCard = new Customer.PaymentCard(testNumber, testExpiration, testSecurity);
+	  testCard = new Customer.PaymentCard(testCardNumber, testExpiration, testSecurity, testAddress);
 	  
 	  assertEquals(testCard.getClass(), Customer.PaymentCard.class);
-	  assertEquals(testCard.getCardNumber(), testNumber);
+	  assertEquals(testCard.getCardNumber(), testCardNumber);
 	  assertEquals(testCard.getExpiration(), testExpiration);
 	  assertEquals(testCard.getSecurityCode(), testSecurity);
+	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
   
   @Test
   public void cardSetter() {
-	  Customer.PaymentCard testCard = new Customer.PaymentCard();
+	  testCard = new Customer.PaymentCard();
 	  
-	  testCard.setCardNumber(testNumber);
+	  testCard.setCardNumber(testCardNumber);
 	  testCard.setExpiration(testExpiration);
 	  testCard.setSecurityCode(testSecurity);
+	  testCard.setBillingAddress(testAddress);
 	  
-	  assertEquals(testCard.getCardNumber(), testNumber);
+	  assertEquals(testCard.getCardNumber(), testCardNumber);
 	  assertEquals(testCard.getExpiration(), testExpiration);
 	  assertEquals(testCard.getSecurityCode(), testSecurity);
+	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
   
   @Test
   public void allArgsConstructor() {
-	  Customer.HomeAddress testAddress = new Customer.HomeAddress(testStreet, testStreet2, testCity, testState, testPostal);
-	  Customer.PaymentCard testCard = new Customer.PaymentCard(testNumber, testExpiration, testSecurity);
-	  
-	  testCust = new Customer(testPhone, testMail, testAddress, testCard);
+	  List<Pizza> testFavorite = Arrays.asList(new Pizza(), new Pizza());
+	  ObjectId test_id = new ObjectId();
+	  testCust = new Customer(test_id, testMail, testPassword, testFirst, testLast, testPhone, testAddress, testCard, testFavorite);
 	  
 	  assertEquals(testCust.getClass(), Customer.class);
-	  assertNull(testCust.get_id());
+	  assertEquals(testCust.get_id(), test_id);
 	  assertEquals(testCust.getPhoneNum(), testPhone);
 	  assertEquals(testCust.getEmail(), testMail);
-	  assertEquals(testCust.getAddress(), testAddress);
+	  assertEquals(testCust.getHomeAddress(), testAddress);
 	  assertEquals(testCust.getCard(), testCard);
   }
 }

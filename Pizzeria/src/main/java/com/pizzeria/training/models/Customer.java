@@ -127,10 +127,9 @@ public class Customer {
 	
 	public Customer() {}
 	
-	public Customer(ObjectId _id, String email, String password, String firstName, String lastName, String phoneNum, Address homeAddress,
+	public Customer(String email, String password, String firstName, String lastName, String phoneNum, Address homeAddress,
 			PaymentCard card, List<Pizza> favoriteOrder) {
 		super();
-		this._id = _id;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -139,6 +138,12 @@ public class Customer {
 		this.homeAddress = homeAddress;
 		this.card = card;
 		this.favoriteOrder = favoriteOrder;
+	}
+	
+	public Customer(ObjectId _id, String email, String password, String firstName, String lastName, String phoneNum, Address homeAddress,
+			PaymentCard card, List<Pizza> favoriteOrder) {
+		this(email, password, firstName, lastName, phoneNum, homeAddress, card, favoriteOrder);
+		set_id(_id);
 	}
 
 	public ObjectId get_id() {
