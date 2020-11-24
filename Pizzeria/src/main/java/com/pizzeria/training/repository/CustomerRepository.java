@@ -13,5 +13,5 @@ public interface CustomerRepository extends MongoRepository<Customer, ObjectId> 
 
 	Customer findBy_id(ObjectId id);
 
-	List<Customer> findByAddressCity(String city);
+	List<Customer> findByHomeAddressCity(String city);
 }

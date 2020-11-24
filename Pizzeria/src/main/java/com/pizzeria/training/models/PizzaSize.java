@@ -1,6 +1,6 @@
 package com.pizzeria.training.models;
 
-public enum Size {
+public enum PizzaSize {
 	SLICE	(0, 4), 
 	PERSONAL(1, 8), 
 	SMALL	(2, 10), 
@@ -11,7 +11,7 @@ public enum Size {
 	private int index;
 	private int diameter;
 	
-	Size(int index, int diameter){
+	PizzaSize(int index, int diameter){
 		this.index = index;
 		this.diameter = diameter;
 	}

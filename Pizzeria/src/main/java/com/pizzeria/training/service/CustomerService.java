@@ -1,6 +1,7 @@
 package com.pizzeria.training.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Customer;
+import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.repository.CustomerRepository;
 
@@ -16,26 +18,38 @@ import com.pizzeria.training.repository.CustomerRepository;
 public class CustomerService {
 
 	private CustomerRepository custRepo;
+	private OrderService orderServ;
 	
 	public CustomerService() {
 	}
 
 	@Autowired
-	public CustomerService(CustomerRepository custRepo) {
+	public CustomerService(CustomerRepository custRepo, OrderService orderServ) {
 		super();
 		this.custRepo = custRepo;
-	}
-	
-	public List<Customer> findAll(){
-		return custRepo.findAll();
+		this.orderServ = orderServ;
 	}
 	
 	public Customer save(Customer newCustomer) {
 		return custRepo.save(newCustomer);
 	}
+
+	public List<Customer> findAll(){
+		return custRepo.findAll();
+	}
+
+	public Customer getCustomerBy_id(ObjectId _id) {
+		return custRepo.findBy_id(_id);
+	}
 	
-	public void delete(Customer customer) {
-		custRepo.delete(customer);
+	public List<Customer> findAllByExample(Customer customer) {
+		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
+		Example<Customer> example = Example.of(customer, matcher);
+		return custRepo.findAll(example);
+	}
+	
+	public List<Customer> getAllByCity(String city) {
+		return custRepo.findByHomeAddressCity(city);
 	}
 	
 	public List<Pizza> updateFavoriteOrder(ObjectId customerId, List<Pizza> newFavorite) throws Exception{
@@ -54,18 +68,8 @@ public class CustomerService {
 			throw new Exception("Target customer's favorite order did not properly update.");
 		}
 	}
-
-	public List<Customer> getAllByCity(String city) {
-		return custRepo.findByAddressCity(city);
-	}
 	
-	public Customer getCustomerBy_id(ObjectId _id) {
-		return custRepo.findBy_id(_id);
-	}
-
-	public List<Customer> findAllByExample(Customer customer) {
-		ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase();
-		Example<Customer> example = Example.of(customer, matcher);
-		return custRepo.findAll(example);
+	public void delete(Customer customer) {
+		custRepo.delete(customer);
 	}
 }

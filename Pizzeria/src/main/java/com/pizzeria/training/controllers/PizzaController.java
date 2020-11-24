@@ -16,67 +16,37 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Pizza;
-import com.pizzeria.training.service.PizzaService;
 
-@RestController
-@RequestMapping("/pizzas")
-@CrossOrigin(origins = "http://localhost:3000")
-public class PizzaController {
-
-	@Autowired
-	private PizzaService pizzaServ;
-	
-	public PizzaController() {
-	}
-	
-	@Autowired
-	public PizzaController(PizzaService pizzaServ) {
-		super();
-		this.pizzaServ = pizzaServ;
-	}
-
-	@GetMapping("/test")
-	public String getAllOrders(){
-		
-		return "Pizza Endpoint works";
-	}
-	
-	// CREATE
-	
-	@PostMapping
-	public Pizza newPizza(@RequestBody Pizza newPizza) {
-	    return pizzaServ.save(newPizza);
-	}
-	
-	// READ
-	
-	@GetMapping
-	public List<Pizza> getAllPizza(@RequestParam(required = false) ObjectId _id) {
-		if (_id != null) return Collections.singletonList(pizzaServ.findBy_id(_id));
-		return pizzaServ.findAll();
-	}
-	
-	// Passing in pizza request body filters by field, just type one field, and it should find the respective pizza
-	@PostMapping("/examples")
-	public List<Pizza> getAllPizzaByExample(@RequestBody Pizza pizza) {
-		return pizzaServ.getAllByExample(pizza);
-	}
-	
-	// UPDATE
-	
-	@PutMapping
-	public Pizza updatePizza(@RequestParam ObjectId _id, @RequestBody Pizza updatePizza) {
-		updatePizza.set_id(_id);
-		return pizzaServ.save(updatePizza);
-	}
-	
-	// DELETE
-	
-	@DeleteMapping
-	public void deletePizza(@RequestParam ObjectId _id) {
-		Pizza pizzaToDelete = pizzaServ.findBy_id(_id);
-		pizzaServ.delete(pizzaToDelete);
-	}
+//@RestController
+//@RequestMapping("/pizzas")
+//@CrossOrigin(origins = "http://localhost:3000")
+//public class PizzaController {
+//
+//	@Autowired
+//	private PizzaService pizzaServ;
+//	
+//	public PizzaController() {
+//	}
+//	
+//	@Autowired
+//	public PizzaController(PizzaService pizzaServ) {
+//		super();
+//		this.pizzaServ = pizzaServ;
+//	}
+//
+//	@GetMapping("/test")
+//	public String getAllOrders(){
+//		
+//		return "Pizza Endpoint works";
+//	}
+//	
+//	// READ
+//	
+//	@GetMapping
+//	public List<Pizza> getAllPizza(@RequestParam(required = false) ObjectId _id) {
+//		if (_id != null) return Collections.singletonList(pizzaServ.findBy_id(_id));
+//		return pizzaServ.findAll();
+//	}
 	 
 	//Sample input for postman
 //	{
@@ -89,4 +59,4 @@ public class PizzaController {
 //	    "cost" : 12,
 //	    "size" : "SMALL"
 //	}
-}
+//}

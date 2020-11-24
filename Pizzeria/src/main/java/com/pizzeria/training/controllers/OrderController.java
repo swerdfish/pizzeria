@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.service.OrderService;
@@ -59,6 +59,24 @@ public class OrderController {
 		return orderServ.findAll();
 	}
 	
+	@GetMapping(path="/{orderStatus}")
+	public ResponseEntity<List<Order>> getOrdersByStatus(@PathVariable("orderStatus") String orderStatus) {
+		try {
+			return new ResponseEntity<>(orderServ.getOrdersByStatus(OrderStatus.valueOf(orderStatus)), HttpStatus.OK);			
+		} catch (IllegalArgumentException e) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	//GET ORDERS BY CUSTOMER ID
+	@GetMapping(path="/?cust_id={cust_id}")
+	public ResponseEntity<List<Order>> getCustomerByOrderId(@RequestParam ObjectId cust_id){
+		if (cust_id==null) return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(orderServ.getOrdersByCustomerId(cust_id), HttpStatus.OK);
+	}
+	
 	@PostMapping("/examples")
 	public List<Order> getAllOrderByExample(@RequestBody Order order) {
 		return orderServ.getAllByExample(order);
@@ -71,22 +89,6 @@ public class OrderController {
 		updateOrder.set_id(_id);
 		return orderServ.save(updateOrder);
 	}
-	
-	@PatchMapping(path="/{orderId}")
-	public ResponseEntity<String> completeOrder(@PathVariable("orderId") String orderId) {
-		return orderServ.updateStatus(new ObjectId(orderId));
-	}
-	
-	@GetMapping(path="/{orderStatus}")
-	public ResponseEntity<List<Order>> getOrdersByStatus(@PathVariable("orderStatus") String orderStatus) {
-		try {
-			return new ResponseEntity<>(orderServ.getOrdersByStatus(OrderStatus.valueOf(orderStatus)), HttpStatus.OK);			
-		} catch (IllegalArgumentException e) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		} catch (Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 
 	// DELETE
 	
@@ -95,23 +97,44 @@ public class OrderController {
 		Order orderToDelete = orderServ.getOrderBy_id(_id);
 		orderServ.delete(orderToDelete);
 	}
-
-	//Sample Input
-//	{
-//	    "pizzas":[{
-//	    "height": 13.0,
-//	    "type": "CLASSIC",
-//	    "toppings" : [
-//	             "BACON",
-//	             "PINEAPPLE"
-//	    ],
-//	    "cost" : 12,
-//	    "size" : "SMALL"
-//	}],
-//	"customerIdString":"example",
-//	"setAsFavorite":false,
-//	"cost" : 12.0,
-//	"tip" : 0
-//	}
 	
 }
+/*
+
+{
+	"customer":{
+		"_id":"5fbc3c9d600ae701ef07d947"
+	},
+	"pizzeriaId":null,
+	"pizzas":[
+		{
+			"type": "CLASSIC",
+			"toppings": [
+			"PEPPERONI", "SAUSAGE"
+			],
+			"cost": 10.0,
+			"size": "LARGE"
+		},
+		{
+			"type": "DEEP_DISH",
+			"toppings": [
+				"SPINACH", "CHEESE"
+			],
+			"cost": 20.0,
+			"size": "SMALL"
+		}
+	],
+	"cost":30.0,
+	"tip":5.0,
+	"status":"COOKING",
+	"type":"PICKUP",
+	"deliveryAddress":{
+		"streetAddress":"1 delivery",
+		"streetAddressLine2":"2 delivery",
+		"city":"city",
+		"state":"state",
+		"postal":"postal"
+	}
+}
+
+*/

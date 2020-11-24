@@ -1,13 +1,13 @@
 package com.pizzeria.training.util;
 
 import com.pizzeria.training.models.PizzaType;
-import com.pizzeria.training.models.Size;
+import com.pizzeria.training.models.PizzaSize;
 import com.pizzeria.training.models.Toppings;
 
 public class PriceCalculator {
 
 	public static void main(String[] args) {
-		System.out.println(typeSizeCostMatrix[2][2] == getCheesePrice(PizzaType.DEEP_DISH, Size.SMALL));
+		System.out.println(typeSizeCostMatrix[2][2] == getCheesePrice(PizzaType.DEEP_DISH, PizzaSize.SMALL));
 	}
 	
 	private static final Double[][] typeSizeCostMatrix;
@@ -34,11 +34,11 @@ public class PriceCalculator {
 		return typeSizeCostMatrix;
 	}
 	
-	public static Double getCheesePrice(PizzaType type, Size size) {
+	public static Double getCheesePrice(PizzaType type, PizzaSize size) {
 		return typeSizeCostMatrix[type.getIndex()][size.getIndex()];
 	}
 	
-	public static Double getPriceWithToppings(PizzaType type, Size size, Toppings[] toppings) {
+	public static Double getPriceWithToppings(PizzaType type, PizzaSize size, Toppings[] toppings) {
 		double totalPrice = getCheesePrice(type, size);
 		for (Toppings t : toppings) {
 			totalPrice += (t.getCostPerSize() * (size.getIndex() + 1) * 0.50D);
