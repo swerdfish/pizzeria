@@ -48,6 +48,19 @@ public class OrderService {
 		Example<Order> example = Example.of(order, matcher);
 		return orderRepo.findAll(example);
 	}
+	/*
+		public List<Pizza> getAllByExample(Pizza pizza) {
+			System.out.println(pizza);
+			ExampleMatcher matcher = ExampleMatcher.matchingAll().withIgnoreCase().withMatcher("height", GenericPropertyMatcher.of(StringMatcher.EXACT));
+			// Filter toppings manually
+			Set<Toppings> toppingsCopy = pizza.getToppings();//==null ? null : new HashSet<>(pizza.getToppings());
+			pizza.setToppings(null);
+			Example<Pizza> example = Example.of(pizza, matcher);
+			List<Pizza> pizzas = pizzaRepo.findAll(example);
+			if (toppingsCopy!=null) pizzas.removeIf(p -> !p.getToppings().equals(toppingsCopy));
+			return pizzas;
+		}
+	 */
 	
 	public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
 		Query query = new Query();

@@ -119,7 +119,7 @@ public class Customer {
 	
 	private String firstName;
 	private String lastName;
-	private Long phoneNum;
+	private String phoneNum;
 	private Address homeAddress;
 	private PaymentCard card;
 	
@@ -127,7 +127,7 @@ public class Customer {
 	
 	public Customer() {}
 	
-	public Customer(ObjectId _id, String email, String password, String firstName, String lastName, Long phoneNum, Address homeAddress,
+	public Customer(ObjectId _id, String email, String password, String firstName, String lastName, String phoneNum, Address homeAddress,
 			PaymentCard card, List<Pizza> favoriteOrder) {
 		super();
 		this._id = _id;
@@ -165,11 +165,11 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public Long getPhoneNum() {
+	public String getPhoneNum() {
 		return phoneNum;
 	}
 
-	public void setPhoneNum(Long phoneNum) {
+	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
 	}
 
