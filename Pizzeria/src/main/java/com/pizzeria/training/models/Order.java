@@ -8,35 +8,56 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * 
- * @author teodorojr.delson, stephen.gruver
- * @param _id 				The MongoDB document Id.
- * @param pizzas			The pizzas ordered by the customer
- * @param customerIdString	The hex string of the _id of the 
- * 							<a href="#{@link com.pizzeria.training.models.Customer}">{@link Customer}</a> 
- * 							that ordered the pizza(s).
- * @param cost 				The cost of the Order
- * @param tip				The tip paid by the customer in addition to the cost
- * @param setAsFavorite			Whether or not the Order's pizzas should be saved as the Customer's favoriteOrder. 
- */
+* 
+* @author teodorojr.delson, stephen.gruver
+* @param _id 				The MongoDB document Id.
+* @param pizzas			The pizzas ordered by the customer
+* @param customerIdString	The hex string of the _id of the 
+* 							<a href="#{@link com.pizzeria.training.models.Customer}">{@link Customer}</a> 
+* 							that ordered the pizza(s).
+* @param cost 				The cost of the Order
+* @param tip				The tip paid by the customer in addition to the cost
+* @param setAsFavorite			Whether or not the Order's pizzas should be saved as the Customer's favoriteOrder. 
+*/
 @Document(collection ="orders")
 public class Order {
+/** The MongoDB document Id. */
 	@Id private ObjectId _id;
+	/** customer that placed the order */
 	@DBRef private Customer customer;
 	@DBRef private ObjectId pizzeriaId;
 	
+	/** list of pizzas in the order */
 	private List<Pizza> pizzas;
+	/** price of order */
 	private Double cost;
+	/** tip left by customer */
 	private Double tip;
+	/** current state of production of the order */
 	private OrderStatus status;
 	private OrderType type;
 	private Address deliveryAddress;
 	
+	/**
+	 * no-argument constructor
+	 * Sets status as IN_PROGRESS by default
+	 */
 	public Order() {
 		super();
 		this.status = OrderStatus.PENDING;
 	}
-	
+
+	/**
+	 * parameterized constructor
+	 * @param pizzas list of pizzas in the order
+	 * @param customer
+	 * @param pizzeriaId
+	 * @param pizzas
+	 * @param cost price of the order	
+	 * @param tip tip left by customer
+	 * @param type
+	 * @param deliveryAddress
+	 */
 	public Order(Customer customer, ObjectId pizzeriaId, List<Pizza> pizzas, Double cost, Double tip, OrderType type, Address deliveryAddress) {
 		this();
 		this.customer = customer;
@@ -50,50 +71,97 @@ public class Order {
 		
 	}
 
+	/**
+	 * retrieve order's ID
+	 * @return mongoDB document Id of the order
+	 */
 	public ObjectId get_id() {
 		return _id;
 	}
 
+	/**
+	 * set order's ID
+	 * @param _id new ID
+	 */
 	public void set_id(ObjectId _id) {
 		this._id = _id;
 	}
 
+	/**
+	 * retrieve the customer who placed the order
+	 * @return mongoDB document of the customer
+	 */
 	public Customer getCustomer() {
 		return customer;
 	}
 
+	/**
+	 * set the customer who placed the order
+	 * @param customer document of the new customer
+	 */
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
+	/**
+	 * retrieve all pizzas on the order
+	 * @return list of pizzas the order contains
+	 */
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
 
+	/**
+	 * set/modify pizzas in the order
+	 * @param pizzas new list of pizzas
+	 */
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
 	}
 
+	/**
+	 * retrieve the cost of the order
+	 * @return order total price
+	 */
 	public Double getCost() {
 		return cost;
 	}
 
+	/**
+	 * set the price of the order
+	 * @param cost new price
+	 */
 	public void setCost(Double cost) {
 		this.cost = cost;
 	}
 
+	/**
+	 * retrieve tip left by customer
+	 * @return tip left
+	 */
 	public Double getTip() {
 		return tip;
 	}
 
+	/**
+	 * set tip left by customer
+	 * @param tip new tip
+	 */
 	public void setTip(Double tip) {
 		this.tip = tip;
 	}
 
+	/**
+	 * retrieve current order status
+	 * @return status enum 
+	 */
 	public OrderStatus getStatus() {
 		return status;
 	}
 	
+	/**
+	 * set current order status to completed
+	 */
 	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}	
@@ -123,6 +191,9 @@ public class Order {
 		this.deliveryAddress = deliveryAddress;
 	}
 
+	/**
+	 * hashCode override method
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,7 +209,10 @@ public class Order {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-
+	/**
+	 * equals override method
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -189,7 +263,10 @@ public class Order {
 			return false;
 		return true;
 	}
-
+	/**
+	 * toString override method
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "Order [_id=" + _id + ", customer=" + customer + ", pizzeriaId=" + pizzeriaId + ", pizzas=" + pizzas

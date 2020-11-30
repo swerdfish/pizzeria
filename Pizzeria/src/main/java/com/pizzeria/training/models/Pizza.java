@@ -4,16 +4,32 @@ import java.util.Set;
 
 import org.bson.types.ObjectId;
 
+/**
+ * Pizza class for use by Pizzeria restaurant
+ * Covers details about size, type, toppings, price, etc.
+ */
 public class Pizza {
 	
 	private ObjectId pizzaId;
+	/** Enum specifying style of pizza crust */
 	private PizzaType type;
+	/** Set of topping Enums on the pizza */
 	private Set<Toppings> toppings;
+	/** price of the pizza */
 	private Double cost;
+	/** Enum specifying a diameter for the pizza */
 	private PizzaSize size;
 	
+	/** No argument constructor */
 	public Pizza() {}
 	
+	/**
+	 * Parameterized constructor
+	 * @param type Style of pizza crust
+	 * @param toppings Toppings to put on the pizza
+	 * @param cost Price of the pizza
+	 * @param size Diameter of the pizza
+	 */
 	public Pizza(PizzaType type, Set<Toppings> toppings, Double cost, PizzaSize size) {
 		super();
 		this.pizzaId = new ObjectId();
@@ -22,40 +38,82 @@ public class Pizza {
 		this.cost = cost;
 		this.size = size;
 	}
-	
-	public ObjectId getPizzaId() {
+
+	/**
+	 * Return mongoDB document Id
+	 * @return object ID
+	 */
+	public ObjectId get_id() {
 		return pizzaId;
 	}
-
-	public void setPizzaId(ObjectId pizzaId) {
-		this.pizzaId = pizzaId;
+	/**
+	 * Update mongoDB document Id
+	 * @param _id new object Id
+	 */
+	public void set_id(ObjectId _id) {
+		this.pizzaId = _id;
 	}
 
+	/**
+	 * Return pizza's crust type
+	 * @return type Enum
+	 */
 	public PizzaType getType() {
 		return type;
 	}
+	/**
+	 * Update pizza's crust type
+	 * @param type new desired type
+	 */
 	public void setType(PizzaType type) {
 		this.type = type;
 	}
+
+	/**
+	 * Return a set of toppings on the pizza
+	 * @return Current toppings
+	 */
 	public Set<Toppings> getToppings() {
 		return toppings;
 	}
+	/**
+	 * Update toppings on the pizza
+	 * @param toppings new set of toppings 
+	 */
 	public void setToppings(Set<Toppings> toppings) {
 		this.toppings = toppings;
 	}
+	/**
+	 * Return the pizza's price
+	 * @return Current price
+	 */
 	public Double getCost() {
 		return cost;
 	}
+	/**
+	 * Update the pizza's price
+	 * @param cost New price 
+	 */
 	public void setCost(Double cost) {
 		this.cost = cost;
 	}
+	/**
+	 * Return the pizza's diameter
+	 * @return diameter 
+	 */
 	public PizzaSize getSize() {
 		return size;
 	}
+	/**
+	 * Update the pizza's diameter
+	 * @param size new desired diameter
+	 */
 	public void setSize(PizzaSize size) {
 		this.size = size;
 	}
-	
+	/**
+	 * hashCode override method
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,7 +125,9 @@ public class Pizza {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-
+	/**
+	 * equals override method
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -98,7 +158,10 @@ public class Pizza {
 			return false;
 		return true;
 	}
-	
+	/**
+	 * Determine price of the pizza based on size, toppings and type
+	 * @return Total price calculated
+	 */
 	public double calculateCost() {
 		double totalPrice = 0.0d;
 		double sizePrice = 0d;
@@ -141,7 +204,9 @@ public class Pizza {
 		totalPrice = typePrice + sizePrice + topPrice;
 		return totalPrice;
 	}
-
+	/**
+	 * toString override method
+	 */
 	@Override
 	public String toString() {
 		return "Pizza [pizzaId=" + pizzaId + ", type=" + type + ", toppings=" + toppings + ", cost=" + cost + ", size="
