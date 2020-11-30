@@ -3,7 +3,9 @@ package com.pizzeria.training.util;
 import com.pizzeria.training.models.PizzaType;
 import com.pizzeria.training.models.PizzaSize;
 import com.pizzeria.training.models.Toppings;
-
+/**
+ * Class for determining the price of a pizza
+ */
 public class PriceCalculator {
 
 	public static void main(String[] args) {
@@ -28,7 +30,7 @@ public class PriceCalculator {
 	 * In order, the rows are classic, thin crust, deep dish, sicilian, stuffed, gluten-free.
 	 * In order, the columns are slice, personal (8"), small (10"), medium (12"), large (14"), xlarge (16").
 	 * The value may be null if we do not offer that combination of PizzaType and Size
-	 * @return
+	 * @return 
 	 */
 	public static Double[][] getCheesePices(){
 		return typeSizeCostMatrix;

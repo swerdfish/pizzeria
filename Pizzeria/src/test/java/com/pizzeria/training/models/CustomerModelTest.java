@@ -55,7 +55,7 @@ public class CustomerModelTest {
 	  
 	  assertEquals(testCard.getClass(), Customer.PaymentCard.class);
 	  assertEquals(testCard.getCardNumber(), testCardNumber);
-	  assertEquals(testCard.getExpiration(), testExpiration);
+	  assertEquals(testCard.getExpiration(), testExpiration); 
 	  assertEquals(testCard.getSecurityCode(), testSecurity);
 	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
@@ -71,7 +71,6 @@ public class CustomerModelTest {
 	  
 	  assertEquals(testCard.getCardNumber(), testCardNumber);
 	  assertEquals(testCard.getExpiration(), testExpiration);
-	  assertEquals(testCard.getSecurityCode(), testSecurity);
 	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
   
