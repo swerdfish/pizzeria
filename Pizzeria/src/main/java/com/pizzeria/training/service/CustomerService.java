@@ -1,5 +1,6 @@
 package com.pizzeria.training.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +42,15 @@ public class CustomerService {
 	 * @param newCustomer The customer to be added to the database
 	 * @return Saves new customer in the database
 	 */
-	public Customer save(Customer newCustomer) {
+	public Customer save(Customer newCustomer) throws IllegalArgumentException {
+		if (newCustomer == null) throw new IllegalArgumentException("Empty Customer document");
+		if (newCustomer.getEmail() == null) throw new IllegalArgumentException("Customer email not provided");
+		if (newCustomer.getPassword() == null) throw new IllegalArgumentException("Customer password not provided");
+		if (newCustomer.getFirstName() == null) throw new IllegalArgumentException("Customer first name not provided");
+		if (newCustomer.getLastName() == null) throw new IllegalArgumentException("Customer last name not provided");
+		if (newCustomer.getPhoneNum() == null) throw new IllegalArgumentException("Customer phone number not provided");
+		if (newCustomer.getFavoriteOrder() == null) newCustomer.setFavoriteOrder(Collections.<Pizza>emptyList());
+		
 		return custRepo.save(newCustomer);
 	}
 

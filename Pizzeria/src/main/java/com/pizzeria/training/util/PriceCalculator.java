@@ -1,7 +1,11 @@
 package com.pizzeria.training.util;
 
-import com.pizzeria.training.models.PizzaType;
+import java.util.HashSet;
+
+import com.pizzeria.training.models.Order;
+import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.models.PizzaSize;
+import com.pizzeria.training.models.PizzaType;
 import com.pizzeria.training.models.Toppings;
 /**
  * Class for determining the price of a pizza
@@ -32,7 +36,7 @@ public class PriceCalculator {
 	 * The value may be null if we do not offer that combination of PizzaType and Size
 	 * @return 
 	 */
-	public static Double[][] getCheesePices(){
+	public static Double[][] getCheesePrices(){
 		return typeSizeCostMatrix;
 	}
 	
@@ -40,11 +44,38 @@ public class PriceCalculator {
 		return typeSizeCostMatrix[type.getIndex()][size.getIndex()];
 	}
 	
-	public static Double getPriceWithToppings(PizzaType type, PizzaSize size, Toppings[] toppings) {
+	public static Double staticCalculatePrice(PizzaType type, PizzaSize size, HashSet<Toppings> toppings) {
 		double totalPrice = getCheesePrice(type, size);
 		for (Toppings t : toppings) {
 			totalPrice += (t.getCostPerSize() * (size.getIndex() + 1) * 0.50D);
 		}
 		return totalPrice;
+	}
+	
+	public static Double staticCalculatePrice(Pizza p) {
+		return staticCalculatePrice(p.getType(), p.getSize(), new HashSet<Toppings>(p.getToppings()));
+	}
+	
+	public static Double staticCalculatePrice(Order o) {
+		Double total = 0.0D;
+		for (Pizza p : o.getPizzas()) {
+			if (p.getCost() == null) {
+				p.setCost(staticCalculatePrice(p));
+			}
+			total += p.getCost();
+		}
+		return total;
+	}
+	
+	public Double calculatePrice(PizzaType type, PizzaSize size, HashSet<Toppings> toppings) {
+		return staticCalculatePrice(type, size, toppings);
+	}
+	
+	public Double calculatePrice(Pizza p) {
+		return staticCalculatePrice(p);
+	}
+	
+	public Double calculatePrice(Order o) {
+		return staticCalculatePrice(o);
 	}
 }

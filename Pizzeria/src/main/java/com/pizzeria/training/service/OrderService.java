@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
+import com.pizzeria.training.models.OrderType;
+import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.repository.OrdersRepository;
+import com.pizzeria.training.util.PriceCalculator;
 /**
  * Service class for routing order-related requests
  */
@@ -44,7 +47,24 @@ public class OrderService {
 	 * @param newOrder The order to be added to the database
 	 * @return Saves new order in the database
 	 */
-	public Order save(Order newOrder) {
+	public Order save(Order newOrder) throws IllegalArgumentException {
+		//Input validation
+		if (newOrder == null) throw new IllegalArgumentException(new NullPointerException("New Order is null"));
+		if (newOrder.getPizzas() == null || newOrder.getPizzas().isEmpty()) throw new IllegalArgumentException("Order contains no pizzas");
+		if (newOrder.getType() == null) throw new IllegalArgumentException("OrderType not provided");
+		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getDeliveryAddress() == null) throw new IllegalArgumentException("Address not provided for delivery order");
+		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getCustomer() == null) throw new IllegalArgumentException("Customer not provided for delivery order");
+		if (newOrder.getCost() == null) {
+			for (Pizza p : newOrder.getPizzas()) {
+				if (p.getCost() == null) {
+					p.setCost(PriceCalculator.staticCalculatePrice(p));
+				}
+			}
+			newOrder.setCost(newOrder.getPizzas().stream().mapToDouble(Pizza::getCost).sum());
+		}
+		if (newOrder.getTip() == null) newOrder.setTip(0.0D);
+		if (newOrder.getStatus() == null) newOrder.setStatus(OrderStatus.PENDING);
+		
 		return orderRepo.save(newOrder);
 	}
 	
@@ -89,6 +109,12 @@ public class OrderService {
 		}
 	 */
 	
+	/**
+	 * @deprecated use getAllByExample() with an Order object that only has a status value 
+	 * @param orderStatus
+	 * @return
+	 */
+	@Deprecated
 	public List<Order> getOrdersByStatus(OrderStatus orderStatus) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("orderStatus").is(orderStatus.toString()));

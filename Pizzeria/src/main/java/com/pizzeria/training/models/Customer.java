@@ -232,12 +232,37 @@ public class Customer {
 		return _id;
 	}
 
+
 	/**
 	 * set customer unique ID
 	 * @param _id ObjectId: new customer ID
 	 */
 	public void set_id(ObjectId _id) {
 		this._id = _id;
+	}
+
+	/**
+	 * retrieve customer email address
+	 * @return customer's email address
+	 */
+	public String getEmail() {
+		return email;
+	}
+	
+	/**
+	 * set customer email address
+	 * @param email String: new email address
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -272,21 +297,6 @@ public class Customer {
 		this.phoneNum = phoneNum;
 	}
 
-	/**
-	 * retrieve customer email address
-	 * @return customer's email address
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * set customer email address
-	 * @param email String: new email address
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	/**
 	 * retrieve customer address

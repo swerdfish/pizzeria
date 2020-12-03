@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pizzeria.training.models.Customer;
-import com.pizzeria.training.models.Order;
 import com.pizzeria.training.service.CustomerService;
 /**
  * REST controller class for Customer object to interact with mongoDB database
@@ -47,8 +47,8 @@ public class CustomerController {
 	 * @return Message to indicate the Customer endpoint is functional
 	 */
 	@GetMapping("/test")
-	public String getAllOrders(){
-		return "Customer Endpoint works";
+	public ResponseEntity<String> test(){
+		return new ResponseEntity<String>("Customer Endpoint works", HttpStatus.OK);
 	}
 	
 	// CREATE
@@ -58,8 +58,8 @@ public class CustomerController {
 	 * @return Saves new customer to Database
 	 */
 	@PostMapping
-	public Customer newCustomer(@RequestBody Customer newCustomer) {
-	    return custServ.save(newCustomer);
+	public ResponseEntity<Customer> newCustomer(@RequestBody Customer newCustomer) throws IllegalArgumentException {
+	    return new ResponseEntity<Customer>(custServ.save(newCustomer), HttpStatus.CREATED);
 	}
 	
 	// READ
@@ -70,10 +70,10 @@ public class CustomerController {
 	  * @return List of all customers in the database
 	  */
 	@GetMapping
-	public List<Customer> getAllCustomer(@RequestParam(required=false) ObjectId _id, @RequestParam(required = false) String city) {
-		if (_id != null) return Collections.singletonList(custServ.getCustomerBy_id(_id));
-		if (city != null) return custServ.getAllByCity(titlecase(city));
-		return custServ.findAll();
+	public ResponseEntity<List<Customer>> getAllCustomer(@RequestParam(required=false) ObjectId _id, @RequestParam(required = false) String city) {
+		if (_id != null) return new ResponseEntity<>(Collections.singletonList(custServ.getCustomerBy_id(_id)), HttpStatus.OK);
+		if (city != null) return new ResponseEntity<>(custServ.getAllByCity(titlecase(city)), HttpStatus.OK);
+		return new ResponseEntity<>(custServ.findAll(), HttpStatus.OK);
 	}
 	/**
 	 * Get method for customers using an example customer object
@@ -81,8 +81,8 @@ public class CustomerController {
 	 * @return Customers matching the given example
 	 */
 	@PostMapping("/examples")
-	public List<Customer> getAllCustomersByExample(@RequestBody Customer customer) {
-		return custServ.findAllByExample(customer);
+	public ResponseEntity<List<Customer>> getAllCustomersByExample(@RequestBody Customer customer) {
+		return new ResponseEntity<>(custServ.findAllByExample(customer), HttpStatus.OK);
 	}
 	
 	// UPDATE
@@ -93,9 +93,9 @@ public class CustomerController {
 	 * @return Saves updated customer in the database
 	 */
 	@PutMapping
-	public Customer updateCustomer(@RequestParam ObjectId _id, @RequestBody Customer updatedCustomer) {
+	public ResponseEntity<Customer> updateCustomer(@RequestParam ObjectId _id, @RequestBody Customer updatedCustomer) throws IllegalArgumentException {
 		updatedCustomer.set_id(_id);
-		return custServ.save(updatedCustomer);
+		return new ResponseEntity<Customer>(custServ.save(updatedCustomer), HttpStatus.OK);
 	}
 	
 	// DELETE
