@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+  
+<suite name="Unit" verbose="1" >
+  <test name="ModelUnit" >
+    <packages>
+       <package name="com.pizzeria.training.models" />
+    </packages>
+  </test>
+  
+  <test name="ServiceUnit">
+    <packages>
+       <package name="com.pizzeria.training.services" />
+    </packages>
+  </test>
+</suite>
