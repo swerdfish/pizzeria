@@ -97,7 +97,8 @@ public class OrderController {
 	}
 
 	/**
-	 * @deprecated Functionality achieved by getAllOrdersByExample() by initializing only the status field
+	 * @deprecated Functionality achieved by getAllOrdersByExample() by initializing
+	 *             only the status field
 	 * @param orderStatus
 	 * @return
 	 */
@@ -133,14 +134,10 @@ public class OrderController {
 	 * @return Saves updated order in the database
 	 */
 	@PutMapping
-	public ResponseEntity<? extends Object> updateOrder(@RequestParam ObjectId _id, @RequestBody Order updateOrder) {
+	public ResponseEntity<? extends Object> updateOrder(@RequestParam ObjectId _id, @RequestBody Order updateOrder)
+			throws IllegalArgumentException {
 		updateOrder.set_id(_id);
-
-		try {
-			return new ResponseEntity<Order>(orderServ.save(updateOrder), HttpStatus.OK);
-		} catch (IllegalArgumentException e) {
-			return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
+		return new ResponseEntity<Order>(orderServ.save(updateOrder), HttpStatus.OK);
 	}
 
 	// DELETE
