@@ -70,7 +70,7 @@ public class CustomerController {
 	  * @return List of all customers in the database
 	  */
 	@GetMapping
-	public ResponseEntity<List<Customer>> getAllCustomer(@RequestParam(required=false) ObjectId _id, @RequestParam(required = false) String city) {
+	public ResponseEntity<List<Customer>> getCustomers(@RequestParam(required=false) ObjectId _id, @RequestParam(required = false) String city) {
 		if (_id != null) return new ResponseEntity<>(Collections.singletonList(custServ.getCustomerBy_id(_id)), HttpStatus.OK);
 		if (city != null) return new ResponseEntity<>(custServ.getAllByCity(titlecase(city)), HttpStatus.OK);
 		return new ResponseEntity<>(custServ.findAll(), HttpStatus.OK);
