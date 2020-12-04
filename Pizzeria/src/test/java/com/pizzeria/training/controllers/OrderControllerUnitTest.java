@@ -86,10 +86,10 @@ public class OrderControllerUnitTest {
 		verify(testOrder, times(1)).set_id(ArgumentMatchers.<ObjectId>any());
 	}
 	
-	@Test(groups = {"orders", "update", "invalidinput", "fast"})
+	@Test(groups = {"orders", "update", "invalidinput", "fast"}, expectedExceptions = IllegalArgumentException.class)
 	public void updateOrderInvalid() {
 		when(orderServ.save(ArgumentMatchers.<Order>any())).thenThrow(IllegalArgumentException.class);
-		assertEquals(orderCont.updateOrder(new ObjectId(), testOrder).getStatusCode(), HttpStatus.BAD_REQUEST);
+		orderCont.updateOrder(new ObjectId(), testOrder);
 		verify(orderServ, times(1)).save(ArgumentMatchers.any());
 		verify(testOrder, times(1)).set_id(ArgumentMatchers.<ObjectId>any());
 	}

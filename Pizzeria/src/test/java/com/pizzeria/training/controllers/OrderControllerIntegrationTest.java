@@ -148,7 +148,7 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 		mvc.perform(put("/orders").queryParam("_id", testOrder.get_id().toHexString())
 				.contentType(MediaType.APPLICATION_JSON).content(objMap.writeValueAsString(testOrder)))
 				.andExpect(status().isBadRequest());
-		verify(orderServ, times(1)).save(ArgumentMatchers.any());
+		verify(orderServ, times(1)).save(ArgumentMatchers.<Order>any());
 	}
 
 	@Test(groups = { "orders", "delete", "slow"})
