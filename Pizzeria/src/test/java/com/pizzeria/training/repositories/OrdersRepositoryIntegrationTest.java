@@ -26,8 +26,9 @@ import com.pizzeria.training.repository.OrdersRepository;
 
 @DataMongoTest
 public class OrdersRepositoryIntegrationTest extends AbstractTestNGSpringContextTests {
-	
-	@Autowired OrdersRepository orderRepo;
+
+	@Autowired
+	OrdersRepository orderRepo;
 
 	ObjectId test_id = null;
 	Customer testCustomer = null;
@@ -39,33 +40,32 @@ public class OrdersRepositoryIntegrationTest extends AbstractTestNGSpringContext
 	OrderType testType = OrderType.DELIVERY;
 	Address testAddress = null;
 
-	private Order testOrder = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testType, testAddress);
-	
+	private Order testOrder = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testStatus, testType,
+			testAddress);
+
 	@Test
 	public void save() {
 		Order savedOrder = orderRepo.save(testOrder);
-		
+
 		assertNotNull(savedOrder.get_id());
 		assertEquals(savedOrder.getCustomer(), testCustomer);
 		assertEquals(savedOrder.getPizzeriaId(), testPizzeria);
 		assertThat(savedOrder.getPizzas(), is(testPizzas));
 		assertEquals(savedOrder.getCost(), testCost);
 		assertEquals(savedOrder.getTip(), testTip);
-		assertEquals(savedOrder.getStatus(), OrderStatus.PENDING);
+		assertEquals(savedOrder.getStatus(), testStatus);
 		assertEquals(savedOrder.getType(), testType);
 		assertEquals(savedOrder.getDeliveryAddress(), testAddress);
-		
+
 		test_id = savedOrder.get_id();
 	}
-	
-	@Test(dependsOnMethods = {"save"})
+
+	@Test(dependsOnMethods = { "save" })
 	public void findBy_Id() {
 		Order foundOrder = orderRepo.findBy_id(test_id);
-		
+
 		assertNotNull(foundOrder);
 		assertEquals(foundOrder.get_id(), test_id);
 	}
-	
-	
-	
+
 }

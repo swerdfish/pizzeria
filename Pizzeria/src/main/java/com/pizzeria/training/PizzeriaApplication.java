@@ -81,16 +81,11 @@ public class PizzeriaApplication implements CommandLineRunner {
 			customerRepository.save(c4);
 			customerRepository.save(c5);
 
-			Order o1 = new Order(c1, null, Arrays.asList(p1, p2), 12.0D, 2.0D, OrderType.CATERING, null);
-			o1.setStatus(OrderStatus.PENDING);
-			Order o2 = new Order(c2, null, Arrays.asList(p2, p3), 15.0D, 3.0D, OrderType.DELIVERY, a2);
-			o2.setStatus(OrderStatus.COOKING);
-			Order o3 = new Order(c3, null, Arrays.asList(p3, p4), 18.5D, 4.5D, OrderType.DINE_IN, null);
-			o3.setStatus(OrderStatus.READY);
-			Order o4 = new Order(c4, null, Arrays.asList(p4, p5), 20.0D, 5.0D, OrderType.PICKUP, null);
-			o4.setStatus(OrderStatus.COMPLETED);
-			Order o5 = new Order(c5, null, Arrays.asList(p1, p5), 22.0D, 6.5D, OrderType.DELIVERY, a5);
-			o5.setStatus(OrderStatus.DELIVERING);
+			Order o1 = new Order(c1, null, Arrays.asList(p1, p2), 12.0D, 2.0D, OrderStatus.PENDING, OrderType.CATERING, null);
+			Order o2 = new Order(c2, null, Arrays.asList(p2, p3), 15.0D, 3.0D, OrderStatus.COOKING, OrderType.DELIVERY, a2);
+			Order o3 = new Order(c3, null, Arrays.asList(p3, p4), 18.5D, 4.5D, OrderStatus.READY, OrderType.DINE_IN, null);
+			Order o4 = new Order(c4, null, Arrays.asList(p4, p5), 20.0D, 5.0D, OrderStatus.COMPLETED, OrderType.PICKUP, null);
+			Order o5 = new Order(c5, null, Arrays.asList(p1, p5), 22.0D, 6.5D, OrderStatus.DELIVERING, OrderType.DELIVERY, a5);
 			orderRepository.save(o1);
 			orderRepository.save(o2);
 			orderRepository.save(o3);

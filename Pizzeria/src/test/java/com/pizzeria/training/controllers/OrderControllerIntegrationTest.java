@@ -38,6 +38,7 @@ import com.pizzeria.training.exception.ControllerAdvisor;
 import com.pizzeria.training.models.Address;
 import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
+import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.models.OrderType;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.service.OrderService;
@@ -63,7 +64,7 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 	@BeforeMethod
 	public void initializeOrderObject() {
 		testOrder = new Order(new Customer(), null, new ArrayList<Pizza>(Arrays.asList(new Pizza())), 1.5D, 2.5D,
-				OrderType.DELIVERY, new Address());
+				OrderStatus.PENDING, OrderType.DELIVERY, new Address());
 		testOrders = new ArrayList<>(Arrays.asList(testOrder));
 	}
 

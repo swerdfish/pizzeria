@@ -54,6 +54,7 @@ public class OrderService {
 		if (newOrder.getType() == null) throw new IllegalArgumentException("OrderType not provided");
 		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getDeliveryAddress() == null) throw new IllegalArgumentException("Address not provided for delivery order");
 		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getCustomer() == null) throw new IllegalArgumentException("Customer not provided for delivery order");
+		if (newOrder.getStatus() == null) newOrder.setStatus(OrderStatus.PENDING);
 		if (newOrder.getCost() == null) {
 			for (Pizza p : newOrder.getPizzas()) {
 				if (p.getCost() == null) {

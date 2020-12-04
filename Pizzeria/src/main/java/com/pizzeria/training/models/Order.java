@@ -44,7 +44,6 @@ public class Order {
 	 */
 	public Order() {
 		super();
-		this.status = OrderStatus.PENDING;
 	}
 
 	/**
@@ -58,14 +57,14 @@ public class Order {
 	 * @param type
 	 * @param deliveryAddress
 	 */
-	public Order(Customer customer, ObjectId pizzeriaId, List<Pizza> pizzas, Double cost, Double tip, OrderType type, Address deliveryAddress) {
+	public Order(Customer customer, ObjectId pizzeriaId, List<Pizza> pizzas, Double cost, Double tip, OrderStatus status, OrderType type, Address deliveryAddress) {
 		this();
 		this.customer = customer;
 		this.pizzeriaId = pizzeriaId;
 		this.pizzas = pizzas;
 		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
 		this.tip = (tip != null ? tip : 0.0D);
-		this.status = OrderStatus.PENDING;
+		this.status = status;
 		this.type = type;
 		this.deliveryAddress = deliveryAddress;
 		

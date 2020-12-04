@@ -46,7 +46,7 @@ public class OrderModelTest {
 	
 	@Test
 	public void allArgsConstructor() {
-		testOrder = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testType, testAddress);
+		testOrder = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testStatus, testType, testAddress);
 		
 		assertEquals(testOrder.getClass(), Order.class);
 		assertNull(testOrder.get_id());
@@ -55,7 +55,7 @@ public class OrderModelTest {
 		assertThat(testOrder.getPizzas(), is(testPizzas));
 		assertEquals(testOrder.getCost(), testCost);
 		assertEquals(testOrder.getTip(), testTip);
-		assertEquals(testOrder.getStatus(), OrderStatus.PENDING);
+		assertEquals(testOrder.getStatus(), testStatus);
 		assertEquals(testOrder.getType(), testType);
 		assertEquals(testOrder.getDeliveryAddress(), testAddress);
 	}

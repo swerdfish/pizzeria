@@ -43,7 +43,8 @@ public class OrderServiceUnitTest {
 	private Customer mockCust = mock(Customer.class);
 	private Pizza mockPizza = mock(Pizza.class);
 	private Address mockAddress = mock(Address.class);
-	private Order testOrder = spy(new Order(mockCust, null, new ArrayList<Pizza>(Arrays.asList(mockPizza)), 1.5D, 2.5D, OrderType.DELIVERY, mockAddress));
+	private Order testOrder = spy(new Order(mockCust, null, new ArrayList<Pizza>(Arrays.asList(mockPizza)), 1.5D, 2.5D,
+			OrderStatus.DELIVERING, OrderType.DELIVERY, mockAddress));
 	private List<Order> testOrders = new ArrayList<>(Arrays.asList(testOrder));
 
 	@Test(groups = { "orders", "create", "fast", "validinput" })
@@ -81,16 +82,16 @@ public class OrderServiceUnitTest {
 		when(testOrder.getCustomer()).thenReturn(null);
 		orderServ.save(testOrder);
 	}
-	
+
 	@Test(groups = { "orders", "create", "fast", "validinput" })
-	public void saveFillInMissingFields(){
+	public void saveFillInMissingFields() {
 		testOrder.setCost(null);
 		testOrder.setTip(null);
 		testOrder.setStatus(null);
 		when(mockPizza.getCost()).thenReturn(1.5D);
-		
+
 		orderServ.save(testOrder);
-		
+
 		verify(testOrder, times(1)).setCost(1.5D);
 		verify(testOrder, times(1)).setTip(0.0D);
 		verify(testOrder, times(1)).setStatus(OrderStatus.PENDING);
@@ -126,7 +127,7 @@ public class OrderServiceUnitTest {
 	}
 
 	@Test(groups = { "orders", "read", "fast" })
-	public void findByCustomerId() {		
+	public void findByCustomerId() {
 		when(orderRepo.findByCustomer_id(ArgumentMatchers.any(ObjectId.class))).thenReturn(testOrders);
 		assertThat(orderServ.getOrdersByCustomerId(new ObjectId()), hasItem(testOrder));
 		verify(orderRepo, times(1)).findByCustomer_id(ArgumentMatchers.any(ObjectId.class));
