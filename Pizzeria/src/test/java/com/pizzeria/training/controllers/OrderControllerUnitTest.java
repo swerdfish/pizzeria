@@ -9,10 +9,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.security.auth.login.AccountNotFoundException;
 
 import org.bson.types.ObjectId;
 import org.mockito.ArgumentMatchers;
@@ -21,16 +24,21 @@ import org.springframework.http.ResponseEntity;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
+import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
+import com.pizzeria.training.service.CustomerService;
 import com.pizzeria.training.service.OrderService;
 
 public class OrderControllerUnitTest {
 
 	private OrderService orderServ = mock(OrderService.class);
-	private OrderController orderCont = new OrderController(orderServ);
+	private CustomerService custServ = mock(CustomerService.class);
+	private OrderController orderCont = new OrderController(orderServ, custServ);
 	
 	private Order testOrder = mock(Order.class);
 	private List<Order> testOrders = new ArrayList<>(Arrays.asList(testOrder));
+	private Customer testCust = mock(Customer.class);
+	private List<Customer> testCusts = new ArrayList<>(Arrays.asList(testCust));
 	
 	@Test(groups = {"orders", "utility", "fast"})
 	public void testEndpoint() {
@@ -53,21 +61,51 @@ public class OrderControllerUnitTest {
 	@Test(groups = {"orders", "read", "fast"})
 	public void getAllOrders() {
 		when(orderServ.findAll()).thenReturn(testOrders);
-		assertThat(orderCont.getOrders(null, null).getBody(), hasItem(testOrder));
+		try {
+			assertThat(orderCont.getOrders(null, null, null).getBody(), hasItem(testOrder));
+		} catch (AccountNotFoundException e) {
+			e.printStackTrace();
+			fail();
+		}
 		verify(orderServ, times(1)).findAll();
 	}
 	
 	@Test(groups = {"orders", "read", "fast"})
 	public void getOrderById() {
 		when(orderServ.getOrderBy_id(ArgumentMatchers.<ObjectId>any())).thenReturn(testOrder);
-		assertThat(orderCont.getOrders(new ObjectId(), null).getBody(), hasItem(testOrder));
+		try {
+			assertThat(orderCont.getOrders(new ObjectId(), null, null).getBody(), hasItem(testOrder));
+		} catch (AccountNotFoundException e) {
+			e.printStackTrace();
+			fail();
+		}
 		verify(orderServ, times(1)).getOrderBy_id(ArgumentMatchers.<ObjectId>any());
 	}
 	
 	@Test(groups = {"orders", "read", "fast"})
 	public void getOrdersByCustomerId() {
 		when(orderServ.getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any())).thenReturn(testOrders);
-		assertThat(orderCont.getOrders(null, new ObjectId()).getBody(), hasItem(testOrder));
+		try {
+			assertThat(orderCont.getOrders(null, new ObjectId(), null).getBody(), hasItem(testOrder));
+		} catch (AccountNotFoundException e) {
+			e.printStackTrace();
+			fail();
+		}
+		verify(orderServ, times(1)).getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any());
+	}
+	
+	@Test(groups = {"orders", "read", "fast"})
+	public void getOrdersByCustomerEmail() {
+		Customer emailOnly = new Customer("email", null, null, null, null, null, null, null);
+		when(custServ.findAllByExample(emailOnly)).thenReturn(testCusts);
+		when(testCust.get_id()).thenReturn(new ObjectId());
+		when(orderServ.getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any())).thenReturn(testOrders);
+		try {
+			assertThat(orderCont.getOrders(null, new ObjectId(), null).getBody(), hasItem(testOrder));
+		} catch (AccountNotFoundException e) {
+			e.printStackTrace();
+			fail();
+		}
 		verify(orderServ, times(1)).getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any());
 	}
 	
