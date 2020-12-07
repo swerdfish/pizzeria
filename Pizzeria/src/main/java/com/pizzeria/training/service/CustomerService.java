@@ -1,5 +1,6 @@
 package com.pizzeria.training.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Customer;
@@ -18,7 +23,7 @@ import com.pizzeria.training.repository.CustomerRepository;
  * Service class for routing customer-related requests
  */
 @Service
-public class CustomerService {
+public class CustomerService implements UserDetailsService{
 	/** Spring Data Repository for customer objects */
 	private CustomerRepository custRepo;
 
@@ -121,5 +126,17 @@ public class CustomerService {
 	 */
 	public void delete(Customer customer) {
 		custRepo.delete(customer);
+	}
+
+		@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+		Customer foundUser = custRepo.findByEmail(username);
+		if(foundUser == null) {
+			return null;
+		}
+		String email = foundUser.getEmail();
+		String password = foundUser.getPassword();
+		return new User(email, password, new ArrayList<>());
+		
 	}
 }
