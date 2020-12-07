@@ -41,6 +41,7 @@ import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.models.OrderType;
 import com.pizzeria.training.models.Pizza;
+import com.pizzeria.training.service.CustomerService;
 import com.pizzeria.training.service.OrderService;
 import com.pizzeria.training.util.serializers.ObjectIdSerializer;
 
@@ -51,21 +52,27 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 
 	@MockBean
 	private OrderService orderServ;
+	@MockBean
+	private CustomerService custServ;
 
 	@Autowired
 	private MockMvc mvc;
-
 	@Autowired
 	private ObjectMapper objMap;
 
 	private Order testOrder;
 	private List<Order> testOrders;
+	private Customer testCust;
+	private List<Customer> testCusts;
 
 	@BeforeMethod
 	public void initializeOrderObject() {
 		testOrder = new Order(new Customer(), null, new ArrayList<Pizza>(Arrays.asList(new Pizza())), 1.5D, 2.5D,
 				OrderStatus.PENDING, OrderType.DELIVERY, new Address());
 		testOrders = new ArrayList<>(Arrays.asList(testOrder));
+		testCust = new Customer("email", "password", "first", "last", "phone", new Address(),
+				new Customer.PaymentCard(), new ArrayList<Pizza>(Arrays.asList(new Pizza())));
+		testCusts = new ArrayList<>(Arrays.asList(testCust));
 	}
 
 	@Test(enabled = false)
@@ -123,6 +130,16 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 	}
 
 	@Test(groups = { "orders", "read", "slow" })
+	public void getOrdersByCustomerEmail() throws Exception {
+		Customer emailOnly = new Customer(testCust.getEmail(), null, null, null, null, null, null, null);
+		when(custServ.findAllByExample(emailOnly)).thenReturn(testCusts);
+		when(orderServ.getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any())).thenReturn(testOrders);
+		mvc.perform(get("/orders").queryParam("email", testCust.getEmail())).andExpect(status().isOk());
+		verify(custServ, times(1)).findAllByExample(emailOnly);
+		verify(orderServ, times(1)).getOrdersByCustomerId(ArgumentMatchers.<ObjectId>any());
+	}
+
+	@Test(groups = { "orders", "read", "slow" })
 	public void getAllOrdersByExample() throws Exception {
 		testOrder.set_id(new ObjectId());
 		when(orderServ.getAllByExample(ArgumentMatchers.<Order>any())).thenReturn(testOrders);
@@ -152,7 +169,7 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 		verify(orderServ, times(1)).save(ArgumentMatchers.<Order>any());
 	}
 
-	@Test(groups = { "orders", "delete", "slow"})
+	@Test(groups = { "orders", "delete", "slow" })
 	public void deleteOrder() throws Exception {
 		testOrder.set_id(new ObjectId());
 		when(orderServ.getOrderBy_id(ArgumentMatchers.<ObjectId>any())).thenReturn(testOrder);
@@ -165,5 +182,6 @@ public class OrderControllerIntegrationTest extends AbstractTestNGSpringContextT
 	@AfterMethod
 	public void resetMocks() {
 		reset(orderServ);
+		reset(custServ);
 	}
 }

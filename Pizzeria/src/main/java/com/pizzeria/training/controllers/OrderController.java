@@ -104,7 +104,7 @@ public class OrderController {
 			target.setEmail(email);
 			List<Customer> custsByEmail = custServ.findAllByExample(target);
 			if (custsByEmail.isEmpty()) throw new AccountNotFoundException("No customer found for the given email");
-			target = custServ.findAllByExample(target).get(0);
+			target = custsByEmail.get(0);
 			return new ResponseEntity<List<Order>>(orderServ.getOrdersByCustomerId(target.get_id()), HttpStatus.OK);
 		}
 		return new ResponseEntity<List<Order>>(orderServ.findAll(), HttpStatus.OK);
