@@ -11,10 +11,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.models.OrderType;
 import com.pizzeria.training.models.Pizza;
+import com.pizzeria.training.repository.CustomerRepository;
 import com.pizzeria.training.repository.OrdersRepository;
 import com.pizzeria.training.util.PriceCalculator;
 /**
@@ -24,6 +26,8 @@ import com.pizzeria.training.util.PriceCalculator;
 public class OrderService {
 	/** Spring Data Repository for order objects */
 	private OrdersRepository orderRepo;
+	/** Spring Data Repository for order objects */
+	private CustomerRepository custRepo;
 	/** MongoTemplate configuration */
 	private MongoTemplate mongoTemplate;
 	/**No argument constructor*/
@@ -109,6 +113,7 @@ public class OrderService {
 			return pizzas;
 		}
 	 */
+	
 	
 	/**
 	 * @deprecated use getAllByExample() with an Order object that only has a status value 

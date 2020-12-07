@@ -1,8 +1,9 @@
 package com.pizzeria.training.controllers;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+
+import javax.security.auth.login.AccountNotFoundException;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,11 +18,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
+import com.pizzeria.training.service.CustomerService;
 import com.pizzeria.training.service.OrderService;
 
 /**
@@ -33,9 +34,13 @@ import com.pizzeria.training.service.OrderService;
 @RequestMapping("/orders")
 public class OrderController {
 	/**
-	 * Service to route requests to repository
+	 * Service to route requests to order repository
 	 */
 	private OrderService orderServ;
+	/**
+	 * Service to route requests to customer repository
+	 */
+	private CustomerService custServ;
 
 	/** No argument constructor */
 	public OrderController() {
@@ -47,9 +52,10 @@ public class OrderController {
 	 * @param orderServ Service to route requests
 	 */
 	@Autowired
-	public OrderController(OrderService orderServ) {
+	public OrderController(OrderService orderServ, CustomerService custServ) {
 		super();
 		this.orderServ = orderServ;
+		this.custServ = custServ;
 	}
 
 	/**
@@ -88,11 +94,19 @@ public class OrderController {
 	 */
 	@GetMapping
 	public ResponseEntity<List<Order>> getOrders(@RequestParam(required = false) ObjectId _id,
-			@RequestParam(required = false) ObjectId cust_id) {
+			@RequestParam(required = false) ObjectId cust_id, @RequestParam(required = false) String email) throws AccountNotFoundException {
 		if (_id != null)
 			return new ResponseEntity<>(Collections.singletonList(orderServ.getOrderBy_id(_id)), HttpStatus.OK);
 		if (cust_id != null)
 			return new ResponseEntity<>(orderServ.getOrdersByCustomerId(cust_id), HttpStatus.OK);
+		if (email != null) {
+			Customer target = new Customer();
+			target.setEmail(email);
+			List<Customer> custsByEmail = custServ.findAllByExample(target);
+			if (custsByEmail.isEmpty()) throw new AccountNotFoundException("No customer found for the given email");
+			target = custServ.findAllByExample(target).get(0);
+			return new ResponseEntity<List<Order>>(orderServ.getOrdersByCustomerId(target.get_id()), HttpStatus.OK);
+		}
 		return new ResponseEntity<List<Order>>(orderServ.findAll(), HttpStatus.OK);
 	}
 
