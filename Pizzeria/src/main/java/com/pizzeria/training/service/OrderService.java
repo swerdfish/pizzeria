@@ -1,5 +1,6 @@
 package com.pizzeria.training.service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.bson.types.ObjectId;
@@ -11,7 +12,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import com.pizzeria.training.models.Customer;
 import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.OrderStatus;
 import com.pizzeria.training.models.OrderType;
@@ -30,6 +30,8 @@ public class OrderService {
 	private CustomerRepository custRepo;
 	/** MongoTemplate configuration */
 	private MongoTemplate mongoTemplate;
+	
+	private static DecimalFormat df = new DecimalFormat("0.00");
 	/**No argument constructor*/
 	public OrderService() {
 	}
@@ -57,7 +59,7 @@ public class OrderService {
 		if (newOrder.getPizzas() == null || newOrder.getPizzas().isEmpty()) throw new IllegalArgumentException("Order contains no pizzas");
 		if (newOrder.getType() == null) throw new IllegalArgumentException("OrderType not provided");
 		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getDeliveryAddress() == null) throw new IllegalArgumentException("Address not provided for delivery order");
-		if (newOrder.getType() == OrderType.DELIVERY && newOrder.getCustomer() == null) throw new IllegalArgumentException("Customer not provided for delivery order");
+		if ((newOrder.getType() == OrderType.DELIVERY || newOrder.getType() == OrderType.PICKUP) && newOrder.getCustomer() == null) throw new IllegalArgumentException("Customer not provided for delivery order");
 		if (newOrder.getStatus() == null) newOrder.setStatus(OrderStatus.PENDING);
 		if (newOrder.getCost() == null) {
 			for (Pizza p : newOrder.getPizzas()) {
@@ -68,7 +70,9 @@ public class OrderService {
 			newOrder.setCost(newOrder.getPizzas().stream().mapToDouble(Pizza::getCost).sum());
 		}
 		if (newOrder.getTip() == null) newOrder.setTip(0.0D);
-		if (newOrder.getStatus() == null) newOrder.setStatus(OrderStatus.PENDING);
+		
+		newOrder.setCost(new Double(df.format(newOrder.getCost())));
+		newOrder.setTip(new Double(df.format(newOrder.getTip())));
 		
 		return orderRepo.save(newOrder);
 	}

@@ -39,7 +39,7 @@ public class OrderModelTest {
 		assertNull(testOrder.getPizzas());
 		assertNull(testOrder.getCost());
 		assertNull(testOrder.getTip());
-		assertEquals(testOrder.getStatus(), OrderStatus.PENDING);
+		assertNull(testOrder.getStatus());
 		assertNull(testOrder.getType());
 		assertNull(testOrder.getDeliveryAddress());
 	}

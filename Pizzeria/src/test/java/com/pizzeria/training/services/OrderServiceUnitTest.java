@@ -2,6 +2,7 @@ package com.pizzeria.training.services;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -92,8 +93,8 @@ public class OrderServiceUnitTest {
 
 		orderServ.save(testOrder);
 
-		verify(testOrder, times(1)).setCost(1.5D);
-		verify(testOrder, times(1)).setTip(0.0D);
+		verify(testOrder, atLeast(1)).setCost(1.5D);
+		verify(testOrder, atLeast(1)).setTip(0.0D);
 		verify(testOrder, times(1)).setStatus(OrderStatus.PENDING);
 		verify(orderRepo, times(1)).save(testOrder);
 	}
