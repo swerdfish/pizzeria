@@ -7,17 +7,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.pizzeria.training.util.PriceCalculator;
+
 /**
+* Class corresponding to documents in the Orders collection. Used for storing data related to pizza orders.
 * 
 * @author teodorojr.delson, stephen.gruver
-* @param _id 				The MongoDB document Id.
-* @param pizzas			The pizzas ordered by the customer
-* @param customerIdString	The hex string of the _id of the 
-* 							<a href="#{@link com.pizzeria.training.models.Customer}">{@link Customer}</a> 
-* 							that ordered the pizza(s).
-* @param cost 				The cost of the Order
-* @param tip				The tip paid by the customer in addition to the cost
-* @param setAsFavorite			Whether or not the Order's pizzas should be saved as the Customer's favoriteOrder. 
 */
 @Document(collection ="orders")
 public class Order {
@@ -62,7 +57,7 @@ public class Order {
 		this.customer = customer;
 		this.pizzeriaId = pizzeriaId;
 		this.pizzas = pizzas;
-		this.cost = (cost != null ? cost : pizzas.stream().map(Pizza::getCost).reduce(0.0D, (subtotal, current) -> subtotal + current));
+		this.cost = cost;
 		this.tip = (tip != null ? tip : 0.0D);
 		this.status = status;
 		this.type = type;

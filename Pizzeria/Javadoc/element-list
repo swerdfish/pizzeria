@@ -1,1 +1,9 @@
+com.pizzeria.training
+com.pizzeria.training.config
+com.pizzeria.training.controllers
+com.pizzeria.training.exception
+com.pizzeria.training.models
 com.pizzeria.training.repository
+com.pizzeria.training.service
+com.pizzeria.training.util
+com.pizzeria.training.util.serializers

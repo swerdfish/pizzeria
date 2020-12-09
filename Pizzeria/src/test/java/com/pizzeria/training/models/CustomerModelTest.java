@@ -1,7 +1,11 @@
 package com.pizzeria.training.models;
 
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,7 +30,7 @@ public class CustomerModelTest {
   Short testSecurity = 1;
   Customer.PaymentCard testCard;
   
-  @Test
+  @Test(groups = {"customers", "fast"})
   public void noArgsConstructor() {
 	  testCust = new Customer();
 	  
@@ -39,7 +43,7 @@ public class CustomerModelTest {
 	  assertNull(testCust.getPhoneNum());
   }
   
-  @Test
+  @Test(groups = {"customers", "fast"})
   public void cardNoArgs() {
 	  Customer.PaymentCard testCard = new Customer.PaymentCard();
 	  
@@ -49,7 +53,7 @@ public class CustomerModelTest {
 	  assertNull(testCard.getSecurityCode());
   }
   
-  @Test
+  @Test(groups = {"customers", "fast"})
   public void cardAllArgs() {
 	  testCard = new Customer.PaymentCard(testCardNumber, testExpiration, testSecurity, testAddress);
 	  
@@ -60,7 +64,7 @@ public class CustomerModelTest {
 	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
   
-  @Test
+  @Test(groups = {"customers", "fast"}, dependsOnMethods = "cardNoArgs")
   public void cardSetter() {
 	  testCard = new Customer.PaymentCard();
 	  
@@ -74,7 +78,48 @@ public class CustomerModelTest {
 	  assertEquals(testCard.getBillingAddress(), testAddress);
   }
   
-  @Test
+  @Test(groups = {"customers", "fast"}, dependsOnMethods = {"cardNoArgs", "cardAllArgs"})
+  public void cardEqualsHashCode() {
+	  Customer.PaymentCard c1 = new Customer.PaymentCard(testCardNumber, testExpiration, testSecurity, testAddress);
+	  Customer.PaymentCard c2 = new Customer.PaymentCard(testCardNumber, testExpiration, testSecurity, testAddress);
+	  assertTrue(c1.equals(c2));
+	  assertTrue(c1.hashCode() == c2.hashCode());
+	  
+	  c2 = new Customer.PaymentCard();
+	  assertFalse(c1.equals(c2));
+	  assertFalse(c1.hashCode() == c2.hashCode());
+  }
+  
+  
+  
+  @Test(groups = {"customers", "fast"}, dependsOnMethods = "noArgsConstructor")
+  public void setters() {
+	  testCust = new Customer();
+	  ObjectId test_id = new ObjectId();
+	  List<Pizza> testFavorite = Arrays.asList(new Pizza(), new Pizza());
+	  testCust.set_id(test_id);
+	  testCust.setEmail(testMail);
+	  testCust.setPassword(testPassword);
+	  testCust.setFirstName(testFirst);
+	  testCust.setLastName(testLast);
+	  testCust.setPhoneNum(testPhone);
+	  testCust.setHomeAddress(testAddress);
+	  testCust.setCard(testCard);
+	  testCust.setFavoriteOrder(testFavorite);
+	  
+	  assertEquals(testCust.getClass(), Customer.class);
+	  assertEquals(testCust.get_id(), test_id);
+	  assertEquals(testCust.getPassword(), testPassword);
+	  assertEquals(testCust.getFirstName(), testFirst);
+	  assertEquals(testCust.getLastName(), testLast);
+	  assertEquals(testCust.getPhoneNum(), testPhone);
+	  assertEquals(testCust.getEmail(), testMail);
+	  assertEquals(testCust.getHomeAddress(), testAddress);
+	  assertEquals(testCust.getCard(), testCard);
+	  assertThat(testCust.getFavoriteOrder(), is(testFavorite));
+  }
+  
+  @Test(groups = {"customers", "fast"})
   public void allArgsConstructor() {
 	  List<Pizza> testFavorite = Arrays.asList(new Pizza(), new Pizza());
 	  ObjectId test_id = new ObjectId();
@@ -82,9 +127,32 @@ public class CustomerModelTest {
 	  
 	  assertEquals(testCust.getClass(), Customer.class);
 	  assertEquals(testCust.get_id(), test_id);
+	  assertEquals(testCust.getPassword(), testPassword);
+	  assertEquals(testCust.getFirstName(), testFirst);
+	  assertEquals(testCust.getLastName(), testLast);
 	  assertEquals(testCust.getPhoneNum(), testPhone);
 	  assertEquals(testCust.getEmail(), testMail);
 	  assertEquals(testCust.getHomeAddress(), testAddress);
 	  assertEquals(testCust.getCard(), testCard);
+	  assertThat(testCust.getFavoriteOrder(), is(testFavorite));
+  }
+  
+  @Test(groups = {"customers", "fast"}, dependsOnMethods = {"noArgsConstructor", "allArgsConstructor"})
+  public void equalsHashCode() {
+	  List<Pizza> testFavorite = Arrays.asList(new Pizza(), new Pizza());
+	  ObjectId test_id = new ObjectId();
+	  Customer cust1 = new Customer(test_id, testMail, testPassword, testFirst, testLast, testPhone, testAddress, testCard, testFavorite);
+	  Customer cust2 = new Customer(test_id, testMail, testPassword, testFirst, testLast, testPhone, testAddress, testCard, testFavorite);
+	  assertTrue(cust1.equals(cust2));
+	  assertTrue(cust1.hashCode() == cust2.hashCode());
+	  
+	  cust2 = new Customer();
+	  assertFalse(cust1.equals(cust2));
+	  assertFalse(cust1.hashCode() == cust2.hashCode());
+  }
+  
+  @Test(groups = {"customers", "fast"})
+  public void toStringTest() {
+	  assertTrue(new Customer().toString().contains("_id"));
   }
 }

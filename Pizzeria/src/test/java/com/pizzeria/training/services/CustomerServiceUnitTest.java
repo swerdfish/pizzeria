@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.activity.InvalidActivityException;
-
 import org.bson.types.ObjectId;
 import org.mockito.ArgumentMatchers;
 import org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener;

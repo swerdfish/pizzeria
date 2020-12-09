@@ -160,8 +160,10 @@ public class Pizza {
 	}
 	/**
 	 * Determine price of the pizza based on size, toppings and type
+	 * @deprecated Use PriceCalculator class instead
 	 * @return Total price calculated
 	 */
+	@Deprecated
 	public double calculateCost() {
 		double totalPrice = 0.0d;
 		double sizePrice = 0d;

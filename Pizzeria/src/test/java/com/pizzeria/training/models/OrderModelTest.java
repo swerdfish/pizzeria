@@ -3,7 +3,8 @@ package com.pizzeria.training.models;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertNotNull;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
@@ -21,13 +22,13 @@ public class OrderModelTest {
 	Customer testCustomer = Mockito.mock(Customer.class);
 	ObjectId testPizzeria = null;
 	List<Pizza> testPizzas = Arrays.asList(new Pizza(), new Pizza());
-	double testCost = 10.0D;
-	double testTip = 2.0D;
+	Double testCost = 10.0D;
+	Double testTip = 2.0D;
 	OrderStatus testStatus = OrderStatus.DELIVERING;
 	OrderType testType = OrderType.DELIVERY;
 	Address testAddress = Mockito.mock(Address.class);
 	
-	@Test
+	@Test(groups = {"orders", "fast"})
 	public void noArgsConstructor() {
 		//System.out.println("In @Test method: noArgsConstructor");
 		testOrder = new Order();
@@ -44,7 +45,7 @@ public class OrderModelTest {
 		assertNull(testOrder.getDeliveryAddress());
 	}
 	
-	@Test
+	@Test(groups = {"orders", "fast"})
 	public void allArgsConstructor() {
 		testOrder = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testStatus, testType, testAddress);
 		
@@ -60,7 +61,7 @@ public class OrderModelTest {
 		assertEquals(testOrder.getDeliveryAddress(), testAddress);
 	}
 	
-	@Test
+	@Test(groups = {"orders", "fast"})
 	public void setters() {
 		ObjectId test_id = new ObjectId();
 		testOrder = new Order();
@@ -87,10 +88,16 @@ public class OrderModelTest {
 		assertEquals(testOrder.getDeliveryAddress(), testAddress);
 	}
 	
-	@Test
+	@Test(groups = {"orders", "fast"})
+	public void equalsHashCode() {
+		Order o1 = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testStatus, testType, testAddress);
+		Order o2 = new Order(testCustomer, testPizzeria, testPizzas, testCost, testTip, testStatus, testType, testAddress);
+		assertTrue(o1.equals(o2));
+		assertTrue(o1.hashCode() == o2.hashCode());
+	}
+	
+	@Test(groups = {"orders", "fast"})
 	public void toStringTest() {
-		testOrder = new Order();
-		
-		assertNotNull(testOrder);
+		assertTrue(new Order().toString().contains("_id="));
 	}
 }
