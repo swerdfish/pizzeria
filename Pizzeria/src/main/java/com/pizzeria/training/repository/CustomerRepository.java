@@ -24,4 +24,6 @@ public interface CustomerRepository extends MongoRepository<Customer, ObjectId> 
 	 * @return The list of customers in the city
 	 */
 	List<Customer> findByHomeAddressCity(String city);
+
+	Customer findByEmail(String email);
 }
