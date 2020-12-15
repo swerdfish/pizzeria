@@ -63,7 +63,7 @@ public class AuthController {
 			System.out.println(authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password)));
 			
 		}catch (BadCredentialsException e){
-			return ResponseEntity.ok(new AuthenticationResponse("Error during client Authentication" + username));
+			return ResponseEntity.ok(new AuthenticationResponse("Username or password is Invalid" + username));
 		}
 		
 		UserDetails loadedUser = customerService.loadUserByUsername(username);

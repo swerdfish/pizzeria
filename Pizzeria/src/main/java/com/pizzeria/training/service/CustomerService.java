@@ -132,7 +132,8 @@ public class CustomerService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
 		Customer foundUser = custRepo.findByEmail(username);
 		if(foundUser == null) {
-			return null;
+			throw new UsernameNotFoundException("Username not found");
+			//return null;
 		}
 		String email = foundUser.getEmail();
 		String password = foundUser.getPassword();
