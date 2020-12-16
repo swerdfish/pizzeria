@@ -139,4 +139,8 @@ public class CustomerService implements UserDetailsService{
 		String password = foundUser.getPassword();
 		return new User(email, password, new ArrayList<>());
 	}
+	
+	public Customer findByEmail(String email) {
+		return custRepo.findByEmail(email);
+	}
 }

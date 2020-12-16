@@ -85,6 +85,10 @@ public class CustomerController {
 		return new ResponseEntity<>(custServ.findAllByExample(customer), HttpStatus.OK);
 	}
 	
+	@GetMapping("/email")
+	public ResponseEntity<Customer> getCustomerByEmail(@RequestParam String email){
+		return new ResponseEntity<>(custServ.findByEmail(email), HttpStatus.OK);
+	}
 	// UPDATE
 	/**
 	 * Put method for updating customer information
