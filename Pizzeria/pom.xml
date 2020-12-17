@@ -85,7 +85,7 @@
     			<configuration>
         			<suiteXmlFiles>
             			<suiteXmlFile>src\test\resources\unit-test.xml</suiteXmlFile>
-            			<suiteXmlFile>src\test\resources\integration-test.xml</suiteXmlFile>
+            			<!-- <suiteXmlFile>src\test\resources\integration-test.xml</suiteXmlFile>  -->
         			</suiteXmlFiles>
     			</configuration>
 			</plugin>

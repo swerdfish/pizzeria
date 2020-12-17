@@ -3,7 +3,6 @@ package com.pizzeria.training.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.pizzeria.training.models.Customer;
-import com.pizzeria.training.models.Order;
 import com.pizzeria.training.models.Pizza;
 import com.pizzeria.training.repository.CustomerRepository;
 /**
@@ -59,6 +57,18 @@ public class CustomerService implements UserDetailsService{
 		return custRepo.save(newCustomer);
 	}
 
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+		Customer foundUser = custRepo.findByEmail(username);
+		if(foundUser == null) {
+			throw new UsernameNotFoundException("Username not found");
+			//return null;
+		}
+		String email = foundUser.getEmail();
+		String password = foundUser.getPassword();
+		return new User(email, password, new ArrayList<>());
+	}
+
 	/**
 	 * Returns all customers in the database
 	 * @return List of all customers in the database
@@ -74,6 +84,10 @@ public class CustomerService implements UserDetailsService{
 	 */
 	public Customer getCustomerBy_id(ObjectId _id) {
 		return custRepo.findBy_id(_id);
+	}
+
+	public Customer findByEmail(String email) {
+		return custRepo.findByEmail(email);
 	}
 	
 	/**
@@ -126,21 +140,5 @@ public class CustomerService implements UserDetailsService{
 	 */
 	public void delete(Customer customer) {
 		custRepo.delete(customer);
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-		Customer foundUser = custRepo.findByEmail(username);
-		if(foundUser == null) {
-			throw new UsernameNotFoundException("Username not found");
-			//return null;
-		}
-		String email = foundUser.getEmail();
-		String password = foundUser.getPassword();
-		return new User(email, password, new ArrayList<>());
-	}
-	
-	public Customer findByEmail(String email) {
-		return custRepo.findByEmail(email);
 	}
 }
