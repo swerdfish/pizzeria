@@ -23,7 +23,8 @@ import com.pizzeria.training.service.CustomerService;
  * REST controller class for Customer object to interact with mongoDB database
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/customers")
 public class CustomerController {
 	/**

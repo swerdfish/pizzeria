@@ -30,7 +30,8 @@ import com.pizzeria.training.service.OrderService;
  * REST Controller class for Order object to interact with mongoDB database
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 @RequestMapping("/orders")
 public class OrderController {
 	/**
