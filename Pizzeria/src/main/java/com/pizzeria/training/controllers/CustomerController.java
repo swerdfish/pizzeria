@@ -24,7 +24,8 @@ import com.pizzeria.training.service.CustomerService;
  */
 @RestController
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin
+//@CrossOrigin
+@CrossOrigin(origins = "http://mypizzeriaapp.com.s3-website.us-east-2.amazonaws.com")
 @RequestMapping("/customers")
 public class CustomerController {
 	/**

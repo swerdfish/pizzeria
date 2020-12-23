@@ -19,7 +19,8 @@ import com.pizzeria.training.service.CustomerService;
 import com.pizzeria.training.util.JwtUtil;
 
 //@CrossOrigin(origins = "http://localhost:3000")
-@CrossOrigin
+//@CrossOrigin
+@CrossOrigin(origins = "http://mypizzeriaapp.com.s3-website.us-east-2.amazonaws.com")
 @RestController
 public class AuthController {
 
